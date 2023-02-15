@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     cron \
     htop \
+    git \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo_mysql zip pgsql pdo pdo_pgsql gd \
     && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer

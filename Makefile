@@ -5,7 +5,7 @@ help:
 
 ##@ [Docker]
 start: ## Spin up the containers and run the app UI in watch mode
-	docker compose up -d && npm run dev
+	docker compose up -d
 
 stop: ## Shut down the containers
 	docker compose down \
@@ -17,7 +17,8 @@ build: ## Build all docker images OR a specific image by providing the service n
 ##@ [Application]
 configure: ## Configures the application when setting it for the first time
 	cp .env.example .env \
-	&& make install
+	&& make install \
+	&& make art ARGS="key:generate --ansi"
 
 composer: ## Run composer commands. Specify the command e.g. via make composer ARGS="install|update|require <dependency>"
 	docker compose run --rm app composer $(ARGS)
