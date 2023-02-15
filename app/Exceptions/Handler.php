@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Exa\Exceptions\ExaException;
+use Exa\Http\Responses\ApiErrorResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -22,7 +25,12 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        //
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -44,5 +52,43 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+            return $this->error($exception, Response::HTTP_UNAUTHORIZED, 'Unauthenticated');
+        }
+
+        if ($exception instanceof \Illuminate\Validation\ValidationException) {
+            return $this->error($exception, Response::HTTP_UNPROCESSABLE_ENTITY, $exception->errors());
+        }
+
+        if (
+            $exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException
+            || $exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+        ) {
+            return $this->error($exception, Response::HTTP_NOT_FOUND, 'Resource not found');
+        }
+
+        if ($exception instanceof ExaException) {
+            return $this->error($exception);
+        }
+
+        return $this->error($exception, Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    protected function unauthenticated($request, \Illuminate\Auth\AuthenticationException $exception)
+    {
+        return $this->error($exception, Response::HTTP_UNAUTHORIZED, 'Unauthenticated');
+    }
+
+    private function error(Throwable $exception, ?int $code = null, string|array|null $message = null): ApiErrorResponse
+    {
+        return new ApiErrorResponse(
+            $message ?? $exception->getMessage(),
+            $exception,
+            $code ?? $exception->getCode()
+        );
     }
 }

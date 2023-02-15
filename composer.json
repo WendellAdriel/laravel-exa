@@ -22,12 +22,14 @@
     ],
     "require": {
         "php": "^8.2",
+        "ext-curl": "*",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2.1",
         "laravel/tinker": "^2.8"
     },
     "require-dev": {
+        "brainmaestro/composer-git-hooks": "v3.0.0-alpha.1",
         "fakerphp/faker": "^1.21",
         "laravel/pint": "^1.5",
         "laravel/sail": "^1.20.2",
@@ -51,12 +53,16 @@
         }
     },
     "scripts": {
+        "post-install-cmd": [
+            "cghooks add --ignore-lock"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "cghooks update"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

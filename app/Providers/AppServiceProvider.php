@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Exa\Services\SlackClient;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->registerSlackClient();
     }
 
     /**
@@ -20,5 +21,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+    }
+
+    private function registerSlackClient(): void
+    {
+        $webhook = config('services.slack.webhook');
+        if (! is_null($webhook)) {
+            $this->app->bind(SlackClient::class, fn () => new SlackClient(
+                config('services.slack.bot.name'),
+                config('services.slack.bot.icon'),
+                $webhook,
+                config('services.slack.channel')
+            ));
+        }
     }
 }
