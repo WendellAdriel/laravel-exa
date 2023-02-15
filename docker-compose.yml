@@ -3,18 +3,18 @@ version: '3'
 services:
     # NGINX + FPM + PHP 8.2
     app:
-        image: wendelladriel/ailienn-app
-        container_name: ailienn-app
+        image: wendelladriel/laravel-exa
+        container_name: laravel-exa
         build:
             context: .
             dockerfile: docker/app/Dockerfile
         volumes:
             - ./:/var/www
         ports:
-            - "9999:80"
-            - "4444:443"
+            - "${APP_EXTERNAL_PORT}:80"
+            - "${APP_EXTERNAL_PORT_SSL}:443"
         networks:
-            - ailienn
+            - laravel-exa
         depends_on:
             - redis
             - mysql
@@ -22,44 +22,46 @@ services:
 
     # REDIS
     redis:
-        image: wendelladriel/ailienn-redis
-        container_name: ailienn-redis
+        image: wendelladriel/laravel-exa-redis
+        container_name: laravel-exa-redis
         build:
             context: .
             dockerfile: docker/redis/Dockerfile
         ports:
-            - "9998:6379"
+            - "${REDIS_EXTERNAL_PORT}:6379"
         volumes:
             - ./docker/redis/data:/data
         networks:
-            - ailienn
+            - laravel-exa
 
     # MYSQL
     mysql:
         image: mysql:8.0
-        container_name: ailienn-db
+        container_name: laravel-exa-db
         ports:
-            - "9997:3306"
+            - "${DB_EXTERNAL_PORT}:3306"
         volumes:
             - dbdata:/var/lib/mysql
         environment:
-            MYSQL_DATABASE: ailienn
-            MYSQL_ROOT_PASSWORD: Connect@
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
         networks:
-            - ailienn
+            - laravel-exa
 
     # MAILHOG
     mailhog:
         image: mailhog/mailhog
-        container_name: ailienn-mailhog
+        container_name: laravel-exa-mailhog
         ports:
-            - "1025:1025"
-            - "9996:8025"
+            - "${MAILHOG_EXTERNAL_PORT_SMTP}:1025"
+            - "${MAILHOG_EXTERNAL_PORT_HTTP}:8025"
         networks:
-            - ailienn
+            - laravel-exa
 
 networks:
-    ailienn:
+    laravel-exa:
         driver: bridge
 
 volumes:
