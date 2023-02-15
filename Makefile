@@ -15,6 +15,10 @@ build: ## Build all docker images OR a specific image by providing the service n
 	docker compose build $(SERVICE_NAME)
 
 ##@ [Application]
+configure: ## Configures the application when setting it for the first time
+	cp .env.example .env \
+	&& make install
+
 composer: ## Run composer commands. Specify the command e.g. via make composer ARGS="install|update|require <dependency>"
 	docker compose run --rm app composer $(ARGS)
 
