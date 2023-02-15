@@ -1,0 +1,67 @@
+version: '3'
+
+services:
+    # NGINX + FPM + PHP 8.2
+    app:
+        image: wendelladriel/ailienn-app
+        container_name: ailienn-app
+        build:
+            context: .
+            dockerfile: docker/app/Dockerfile
+        volumes:
+            - ./:/var/www
+        ports:
+            - "9999:80"
+            - "4444:443"
+        networks:
+            - ailienn
+        depends_on:
+            - redis
+            - mysql
+            - mailhog
+
+    # REDIS
+    redis:
+        image: wendelladriel/ailienn-redis
+        container_name: ailienn-redis
+        build:
+            context: .
+            dockerfile: docker/redis/Dockerfile
+        ports:
+            - "9998:6379"
+        volumes:
+            - ./docker/redis/data:/data
+        networks:
+            - ailienn
+
+    # MYSQL
+    mysql:
+        image: mysql:8.0
+        container_name: ailienn-db
+        ports:
+            - "9997:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: ailienn
+            MYSQL_ROOT_PASSWORD: Connect@
+        networks:
+            - ailienn
+
+    # MAILHOG
+    mailhog:
+        image: mailhog/mailhog
+        container_name: ailienn-mailhog
+        ports:
+            - "1025:1025"
+            - "9996:8025"
+        networks:
+            - ailienn
+
+networks:
+    ailienn:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
