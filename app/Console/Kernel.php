@@ -2,11 +2,16 @@
 
 namespace App\Console;
 
+use Exa\Commands\MakeModuleCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        MakeModuleCommand::class,
+    ];
+
     /**
      * Define the application's command schedule.
      */
@@ -20,10 +25,6 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $modules = config('modules');
-
-        foreach ($modules as $module) {
-            $this->load(base_path("modules/{$module}/Commands"));
-        }
+        //
     }
 }
