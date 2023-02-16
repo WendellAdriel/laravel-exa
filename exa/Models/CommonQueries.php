@@ -10,14 +10,16 @@ trait CommonQueries
 {
     public const ALL_COLUMNS = ['*'];
 
+    public const COMPARE_IN = 'IN';
+
     public static function getAll(array $columns = self::ALL_COLUMNS): Collection
     {
-        return self::newQuery($columns)->get();
+        return self::newQueryBuilder($columns)->get();
     }
 
     public static function getAllWith(array $columns = self::ALL_COLUMNS, array $with = []): Collection
     {
-        return self::newQuery($columns)->with($with)->get();
+        return self::newQueryBuilder($columns)->with($with)->get();
     }
 
     public static function getAllBy(string $attribute, mixed $value, string $compareType = '=', bool $withTrash = false): Collection
@@ -59,7 +61,7 @@ trait CommonQueries
     {
         $formattedValue = is_array($value) || $value instanceof Enumerable ? $value : [$value];
 
-        return self::newQuery()
+        return self::newQueryBuilder()
             ->whereIn($attribute, $formattedValue)
             ->update($updateFields);
     }
@@ -68,9 +70,22 @@ trait CommonQueries
     {
         $formattedValue = is_array($value) || $value instanceof Enumerable ? $value : [$value];
 
-        return self::newQuery()
+        return self::newQueryBuilder()
             ->whereIn($attribute, $formattedValue)
             ->delete();
+    }
+
+    private static function getByParamsBase(array $params, string $defaultCompareType = '=', bool $withTrashed = false): Builder
+    {
+        $query = self::newQueryBuilder();
+        foreach ($params as $param) {
+            $compareType = count($param) === 2 ? $defaultCompareType : $param[2];
+            $query = (mb_strtoupper($compareType) === self::COMPARE_IN)
+                ? $query->whereIn($param[0], $param[1])
+                : $query->where($param[0], $compareType, $param[1]);
+        }
+
+        return $withTrashed ? $query->withTrashed() : $query;
     }
 
     /**
@@ -78,7 +93,7 @@ trait CommonQueries
      *
      * @param  array|array<string>|string  $columns
      */
-    private static function newQuery(...$columns): Builder
+    private static function newQueryBuilder(...$columns): Builder
     {
         if (count($columns) === 1 && is_array($columns[0])) {
             $columns = $columns[0];
@@ -88,21 +103,6 @@ trait CommonQueries
             $columns = [self::ALL_COLUMNS];
         }
 
-        return self::newQuery()->select(...$columns);
-    }
-
-    private static function getByParamsBase(array $params, string $defaultCompareType = '=', bool $withTrashed = false): Builder
-    {
-        $query = self::newQuery();
-        foreach ($params as $param) {
-            $compareType = count($param) === 2 ? $defaultCompareType : $param[2];
-            if (mb_strtoupper($compareType) === 'IN') {
-                $query = $query->whereIn($param[0], $param[1]);
-            } else {
-                $query = $query->where($param[0], $compareType, $param[1]);
-            }
-        }
-
-        return $withTrashed ? $query->withTrashed() : $query;
+        return self::query()->select(...$columns);
     }
 }
