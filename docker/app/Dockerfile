@@ -46,5 +46,8 @@ RUN composer dump-autoload
 
 RUN chmod -R 777 /var/www/storage/
 
+# Mark WORKDIR as safe for GIT
+RUN git config --global --add safe.directory /var/www
+
 EXPOSE 80
 EXPOSE 443

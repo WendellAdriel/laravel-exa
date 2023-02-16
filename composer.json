@@ -28,7 +28,7 @@
         "laravel/sanctum": "^3.2.1",
         "laravel/tinker": "^2.8",
         "strictus/strictus": "^1.0",
-        "wendelladriel/laravel-validated-dto": "^2.2"
+        "wendelladriel/laravel-validated-dto": "^2.2.5"
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "v3.0.0-alpha.1",
