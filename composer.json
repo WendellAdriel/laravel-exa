@@ -1,7 +1,7 @@
 {
     "name": "wendelladriel/laravel-exa",
     "type": "project",
-    "description": "Opinionated API Skeleton for Laravel",
+    "description": "Opinionated Modularized API Skeleton for Laravel",
     "keywords": [
         "framework",
         "laravel",
