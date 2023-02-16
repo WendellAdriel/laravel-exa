@@ -9,6 +9,8 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class DatatableDTO extends ValidatedDTO
 {
+    public const PER_PAGE_ALL = 'all';
+
     public int $page;
 
     public int|string $per_page;
@@ -18,6 +20,11 @@ class DatatableDTO extends ValidatedDTO
     public ?string $sort_order;
 
     public ?string $search;
+
+    public function getAll(): bool
+    {
+        return $this->per_page === self::PER_PAGE_ALL;
+    }
 
     protected function rules(): array
     {

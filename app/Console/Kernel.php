@@ -20,6 +20,10 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        //
+        $modules = config('modules');
+
+        foreach ($modules as $module) {
+            $this->load(base_path("modules/{$module}/Commands"));
+        }
     }
 }
