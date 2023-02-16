@@ -15,7 +15,7 @@
 
 * Docker config with PHP, Nginx, MySQL, Redis and Mailhog
 * Pint configuration
-* Pest for Tests
+* Pest v2 for Tests
 * Git Hooks for linting files
 * Base classes to speed up the development
 * DTOs

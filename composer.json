@@ -37,6 +37,8 @@
         "laravel/sail": "^1.20.2",
         "mockery/mockery": "^1.5.1",
         "nunomaduro/collision": "^7.0.2",
+        "pestphp/pest": "2.x-dev",
+        "pestphp/pest-plugin-laravel": "2.x-dev",
         "phpunit/phpunit": "^10.0.7",
         "spatie/laravel-ignition": "^2.0"
     },
@@ -93,6 +95,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
