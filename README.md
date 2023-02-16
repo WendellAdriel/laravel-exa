@@ -21,7 +21,8 @@
 * DTOs
 * Slack client for notifications
 * API structured in modules
-* Authorization, Users and Roles management out-of-the-box
+* Laravel Sanctum for Authentication
+* Users and Roles management out-of-the-box
 
 ## Configuring the Application
 
@@ -62,7 +63,7 @@ The `app` folder contains only the files of a default **Laravel** installation.
 
 The `exa` folder contains all the base classes provided by this **skeleton** to help you to develop your **API**.
 
-The `modules` folder contains the code for your application. By default, you have an **Auth** module with **Authentication**,
+The `modules` folder contains the code for your application. By default, you have an **Auth** module for **Authentication**,
 **User** and **Roles management out-of-the-box**. It also provides a **Common** module that you can put shared logic for
 your application.
 
