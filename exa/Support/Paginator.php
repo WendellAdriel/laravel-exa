@@ -30,8 +30,8 @@ readonly class Paginator
     public static function manualPaginateStream(Enumerable $items, int $total, DatatableDTO $dto): array
     {
         $itemsTotal = $items->count();
-        $pageCount  = $dto->getAll() ? 1 : (int) ceil($itemsTotal / $dto->per_page);
-        $data       = $dto->getAll()
+        $pageCount = $dto->getAll() ? 1 : (int) ceil($itemsTotal / $dto->per_page);
+        $data = $dto->getAll()
             ? $items
             : $items->forPage($dto->page, $dto->per_page)->values();
 

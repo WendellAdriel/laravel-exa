@@ -33,7 +33,7 @@ class DatatableDTO extends ValidatedDTO
             'per_page' => ['sometimes'],
             'sort_field' => ['sometimes', 'string'],
             'sort_order' => ['sometimes', 'string', new Enum(SortOptions::class)],
-            'search' => ['sometimes', 'string']
+            'search' => ['sometimes', 'string'],
         ];
     }
 

@@ -46,7 +46,7 @@ class MakeModuleCommand extends Command
         mkdir($path, 0755, true);
 
         $commonRoutingPath = base_path('modules/Common/Routes');
-        $routingFile       = 'v1.php';
+        $routingFile = 'v1.php';
 
         copy("$commonRoutingPath/$routingFile", "$path/$routingFile");
     }
