@@ -5,6 +5,12 @@
     </p>
 </div>
 
+<p align="center">
+<a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/packagist/v/WendellAdriel/laravel-exa.svg?style=flat-square" alt="Packagist"></a>
+<a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/packagist/php-v/WendellAdriel/laravel-exa.svg?style=flat-square" alt="PHP from Packagist"></a>
+<a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/badge/Laravel-10.x-brightgreen.svg?style=flat-square" alt="Laravel Version"></a>
+</p>
+
 ## Features
 
 * Docker config with PHP, Nginx, MySQL, Redis and Mailhog
