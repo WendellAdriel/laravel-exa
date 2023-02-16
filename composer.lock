@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9adbe5a6313f738e26d3b7a84de8fdc8",
+    "content-hash": "2dc30fb603e147ab5c2bea791b974509",
     "packages": [
         {
             "name": "brick/math",
@@ -2944,6 +2944,74 @@
             "time": "2023-01-12T18:13:24+00:00"
         },
         {
+            "name": "strictus/strictus",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-strictus/strictus.git",
+                "reference": "7092aede2a90cd88d04e28a7ce89519387e75b8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-strictus/strictus/zipball/7092aede2a90cd88d04e28a7ce89519387e75b8b",
+                "reference": "7092aede2a90cd88d04e28a7ce89519387e75b8b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.4.1",
+                "pestphp/pest": "^1.22.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Strictus\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christopher Miller",
+                    "email": "chris@jump24.co.uk",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Wendell Adriel",
+                    "email": "me@wendelladriel.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Strict Typing on inline variables for PHP",
+            "keywords": [
+                "php",
+                "strict",
+                "strict types",
+                "strict typing",
+                "type",
+                "typing"
+            ],
+            "support": {
+                "issues": "https://github.com/php-strictus/strictus/issues",
+                "source": "https://github.com/php-strictus/strictus/tree/1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/wendelladriel",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/WendellAdriel",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-05T20:18:08+00:00"
+        },
+        {
             "name": "symfony/console",
             "version": "v6.2.5",
             "source": {
@@ -5406,6 +5474,80 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wendelladriel/laravel-validated-dto",
+            "version": "v2.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WendellAdriel/laravel-validated-dto.git",
+                "reference": "ddd0a946ca7d7a5df4e8122813282a388258c441"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WendellAdriel/laravel-validated-dto/zipball/ddd0a946ca7d7a5df4e8122813282a388258c441",
+                "reference": "ddd0a946ca7d7a5df4e8122813282a388258c441",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "illuminate/console": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/http": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/validation": "^7.0|^8.0|^9.0|^10.0",
+                "laravel/pint": "^1.4.1",
+                "orchestra/testbench": "^6.0|^7.20|^8.0",
+                "pestphp/pest": "^1.22.3",
+                "pestphp/pest-plugin-faker": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "WendellAdriel\\ValidatedDTO\\Providers\\ValidatedDTOServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "WendellAdriel\\ValidatedDTO\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wendell Adriel",
+                    "email": "wendelladriel.ti@gmail.com"
+                }
+            ],
+            "description": "Data Transfer Objects with validation for Laravel applications",
+            "keywords": [
+                "Data Transfer Object",
+                "dto",
+                "laravel",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/WendellAdriel/laravel-validated-dto/issues",
+                "source": "https://github.com/WendellAdriel/laravel-validated-dto"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/wendelladriel",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/WendellAdriel",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-07T20:47:28+00:00"
         }
     ],
     "packages-dev": [
