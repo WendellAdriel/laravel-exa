@@ -13,16 +13,16 @@
 
 ## Features
 
-* Docker config with PHP, Nginx, MySQL, Redis and Mailhog
-* Pint configuration
+* Docker config with PHP, Nginx, MySQL, Redis and Mailpit
+* Laravel Pint configuration
 * Pest v2 for Tests
 * Git Hooks for linting files
 * Base classes to speed up the development
-* DTOs
-* Slack client for notifications
+* DTOs with [Laravel Validated DTO](https://github.com/WendellAdriel/laravel-validated-dto)
+* Slack Client for notifications
 * API structured in modules
 * Laravel Sanctum for Authentication
-* Users and Roles management out-of-the-box
+* Users management out-of-the-box with simple roles system
 
 ## Configuring the Application
 
@@ -46,8 +46,8 @@ You can update which ports the services will connect to your machine by updating
 * `APP_EXTERNAL_PORT_SSL`
 * `DB_EXTERNAL_PORT`
 * `REDIS_EXTERNAL_PORT`
-* `MAILHOG_EXTERNAL_PORT_SMTP`
-* `MAILHOG_EXTERNAL_PORT_HTTP`
+* `MAILPIT_EXTERNAL_PORT_SMTP`
+* `MAILPIT_EXTERNAL_PORT_HTTP`
 
 ## Commands Available
 
@@ -64,7 +64,7 @@ The `app` folder contains only the files of a default **Laravel** installation.
 The `exa` folder contains all the base classes provided by this **skeleton** to help you to develop your **API**.
 
 The `modules` folder contains the code for your application. By default, you have an **Auth** module for **Authentication**,
-**User** and **Roles management out-of-the-box**. It also provides a **Common** module that you can put shared logic for
+and **User management out-of-the-box**. It also provides a **Common** module that you can put shared logic for
 your application.
 
 ## Creating Modules

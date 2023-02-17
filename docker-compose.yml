@@ -18,7 +18,7 @@ services:
         depends_on:
             - redis
             - mysql
-            - mailhog
+            - mailpit
 
     # REDIS
     redis:
@@ -50,13 +50,13 @@ services:
         networks:
             - laravel-exa
 
-    # MAILHOG
-    mailhog:
-        image: mailhog/mailhog
-        container_name: laravel-exa-mailhog
+    # MAILPIT
+    mailpit:
+        image: axllent/mailpit
+        container_name: laravel-exa-mailpit
         ports:
-            - "${MAILHOG_EXTERNAL_PORT_SMTP}:1025"
-            - "${MAILHOG_EXTERNAL_PORT_HTTP}:8025"
+            - "${MAILPIT_EXTERNAL_PORT_SMTP}:1025"
+            - "${MAILPIT_EXTERNAL_PORT_HTTP}:8025"
         networks:
             - laravel-exa
 
