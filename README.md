@@ -13,6 +13,7 @@
 
 ## Features
 
+* Your API running on the latest version of Laravel and PHP
 * Docker config with PHP, Nginx, MySQL, Redis and Mailpit
 * Laravel Pint configuration
 * Pest v2 for Tests
