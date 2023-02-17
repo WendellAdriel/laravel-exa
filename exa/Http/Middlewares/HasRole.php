@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Auth\Support\Roles;
 
-class HasRole
+final class HasRole
 {
     /**
      * @throws AccessDeniedException
