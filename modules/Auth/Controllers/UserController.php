@@ -14,27 +14,34 @@ use Modules\Auth\Actions\FetchUsersList;
 use Modules\Auth\Actions\UpdateUser;
 use Modules\Auth\DTOs\CreateUserDTO;
 use Modules\Auth\DTOs\UpdateUserDTO;
+use Modules\Auth\Resources\UserResource;
 
 class UserController extends Controller
 {
     public function index(Request $request, FetchUsersList $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse($action->handle(DatatableDTO::fromRequest($request)));
+        return new ApiSuccessResponse(
+            UserResource::collection($action->handle(DatatableDTO::fromRequest($request)))
+        );
     }
 
     public function show(string $uuid, FetchUser $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse($action->handle($uuid));
+        return new ApiSuccessResponse(new UserResource($action->handle($uuid)));
     }
 
     public function store(Request $request, CreateUser $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse($action->handle(CreateUserDTO::fromRequest($request)));
+        return new ApiSuccessResponse(
+            new UserResource($action->handle(CreateUserDTO::fromRequest($request)))
+        );
     }
 
     public function update(Request $request, string $uuid, UpdateUser $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse($action->handle($uuid, UpdateUserDTO::fromRequest($request)));
+        return new ApiSuccessResponse(
+            new UserResource($action->handle($uuid, UpdateUserDTO::fromRequest($request)))
+        );
     }
 
     public function destroy(string $uuid, DeleteUser $action): NoContentResponse

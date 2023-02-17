@@ -10,12 +10,16 @@ use Modules\Auth\Actions\FetchLoggedUser;
 use Modules\Auth\Actions\Login;
 use Modules\Auth\Actions\Logout;
 use Modules\Auth\DTOs\LoginDTO;
+use Modules\Auth\Resources\LoginResource;
+use Modules\Auth\Resources\UserResource;
 
 class AuthController extends Controller
 {
     public function login(Request $request, Login $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse($action->handle(LoginDTO::fromRequest($request)));
+        return new ApiSuccessResponse(
+            new LoginResource($action->handle(LoginDTO::fromRequest($request)))
+        );
     }
 
     public function logout(Logout $action): NoContentResponse
@@ -27,6 +31,6 @@ class AuthController extends Controller
 
     public function user(FetchLoggedUser $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse($action->handle());
+        return new ApiSuccessResponse(new UserResource($action->handle()));
     }
 }
