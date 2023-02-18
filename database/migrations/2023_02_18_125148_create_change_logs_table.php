@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('table');
             $table->string('action', 50);
             $table->json('payload');
-            $table->json('old_data');
-            $table->json('new_data');
-            $table->json('changed_data');
+            $table->json('old_data')->nullable();
+            $table->json('new_data')->nullable();
+            $table->json('changed_data')->nullable();
             $table->timestamps();
             $table->index(['table', 'record_id', 'created_at']);
             $table->index(['table', 'record_id', 'action', 'created_at']);

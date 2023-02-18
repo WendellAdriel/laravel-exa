@@ -11,6 +11,9 @@
 |
 */
 
+use Modules\Auth\Models\User;
+use Modules\Auth\Support\Roles;
+
 uses(
     Tests\TestCase::class,
     Illuminate\Foundation\Testing\RefreshDatabase::class,
@@ -42,7 +45,19 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function testAdminUser(): User
 {
-    // ..
+    $user = new User([
+        'uuid' => Str::uuid()->toString(),
+        'name' => fake()->name(),
+        'email' => fake()->unique()->safeEmail(),
+        'email_verified_at' => now(),
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'remember_token' => Str::random(10),
+        'role' => Roles::ADMIN->value,
+    ]);
+
+    $user->save();
+
+    return $user;
 }

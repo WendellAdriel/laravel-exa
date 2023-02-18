@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('{uuid}')->group(function () {
             Route::get('/', [UserController::class, 'show']);
             Route::put('/', [UserController::class, 'update']);
-            Route::delete('/', [UserController::class, 'destroy'])->middleware('role:'.Roles::ADMIN->value);
+            Route::delete('/', [UserController::class, 'destroy'])->middleware('role:'.Roles::MANAGER->value);
         });
     });
 });

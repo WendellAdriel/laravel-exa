@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('user_logins', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('ip', 50);
-            $table->string('user_agent');
+            $table->string('ip', 50)->nullable();
+            $table->string('user_agent')->nullable();
             $table->timestamps();
             $table->index(['user_id', 'created_at']);
         });

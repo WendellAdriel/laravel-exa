@@ -6,9 +6,8 @@ use App\Http\Controllers\Controller;
 use Exa\Http\Responses\ApiSuccessResponse;
 use Exa\Http\Responses\NoContentResponse;
 use Illuminate\Http\Request;
-use Modules\Auth\Actions\FetchLoggedUser;
+use Illuminate\Support\Facades\Auth;
 use Modules\Auth\Actions\Login;
-use Modules\Auth\Actions\Logout;
 use Modules\Auth\DTOs\LoginDTO;
 use Modules\Auth\Resources\LoginResource;
 use Modules\Auth\Resources\UserResource;
@@ -22,15 +21,15 @@ class AuthController extends Controller
         );
     }
 
-    public function logout(Logout $action): NoContentResponse
+    public function logout(): NoContentResponse
     {
-        $action->handle();
+        Auth::guard('web')->logout();
 
         return new NoContentResponse();
     }
 
-    public function user(FetchLoggedUser $action): ApiSuccessResponse
+    public function user(): ApiSuccessResponse
     {
-        return new ApiSuccessResponse(new UserResource($action->handle()));
+        return new ApiSuccessResponse(new UserResource(Auth::user()));
     }
 }

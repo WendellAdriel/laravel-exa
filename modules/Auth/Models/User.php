@@ -22,6 +22,7 @@ class User extends Authenticatable
         CommonQueries;
 
     protected $fillable = [
+        'uuid',
         'name',
         'email',
         'password',
