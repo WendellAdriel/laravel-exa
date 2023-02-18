@@ -18,6 +18,7 @@ final class BlockViewerUsers
         if ($user->is_viewer && ! $request->isMethod('get')) {
             throw new AccessDeniedException();
         }
+
         return $next($request);
     }
 }

@@ -36,6 +36,10 @@ trait LogChanges
         });
 
         static::deleted(function (Model $model) {
+            if ($model->disableChangeLogs) {
+                return;
+            }
+
             if ($model->logDeleteEvent) {
                 static::logChange($model, ChangeActions::DELETE);
             }
