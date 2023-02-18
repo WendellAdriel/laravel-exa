@@ -4,6 +4,7 @@ namespace Modules\Auth\Models;
 
 use Exa\Models\CommonQueries;
 use Exa\Models\HasUuidField;
+use Exa\Models\LogChanges;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +13,13 @@ use Modules\Auth\Traits\HasRole;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRole, HasUuidField, CommonQueries;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        HasRole,
+        HasUuidField,
+        LogChanges,
+        CommonQueries;
 
     protected $fillable = [
         'name',

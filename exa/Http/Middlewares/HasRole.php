@@ -16,7 +16,7 @@ final class HasRole
     public function handle(Request $request, Closure $next, string $role)
     {
         $user = Auth::user();
-        if (empty($user)) {
+        if (is_null($user)) {
             throw new AccessDeniedException();
         }
         if ($user->is_admin) {
