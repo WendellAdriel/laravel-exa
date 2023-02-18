@@ -17,12 +17,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
-        Route::post('/', [UserController::class, 'store']);
+        Route::post('/', [UserController::class, 'store'])->middleware('role:'.Roles::MANAGER->value);
 
         Route::prefix('{uuid}')->group(function () {
             Route::get('/', [UserController::class, 'show']);
-            Route::put('/', [UserController::class, 'update']);
-            Route::delete('/', [UserController::class, 'destroy'])->middleware('role:'.Roles::MANAGER->value);
+
+            Route::middleware('role:'.Roles::MANAGER->value)->group(function () {
+                Route::put('/', [UserController::class, 'update']);
+                Route::delete('/', [UserController::class, 'destroy']);
+            });
         });
     });
 });

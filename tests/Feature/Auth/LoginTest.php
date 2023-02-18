@@ -3,9 +3,10 @@
 use Illuminate\Auth\AuthenticationException;
 use Modules\Auth\Actions\Login;
 use Modules\Auth\DTOs\LoginDTO;
+use Modules\Auth\Support\Roles;
 
 it('logins successfully', function () {
-    $user = testAdminUser();
+    $user = testUser(Roles::ADMIN);
 
     $action = resolve(Login::class);
     $dto = new LoginDTO([
@@ -19,7 +20,7 @@ it('logins successfully', function () {
 });
 
 it('fails to login with wrong credentials', function () {
-    $user = testAdminUser();
+    $user = testUser(Roles::ADMIN);
 
     $action = resolve(Login::class);
     $dto = new LoginDTO([
