@@ -24,8 +24,16 @@
 * API structured in modules
 * Laravel Sanctum for Authentication
 * Users management out-of-the-box with simple roles system
+* Logs on DB for user logins and for actions made on models
+* [Strictus](https://github.com/php-strictus/strictus) for enforcing local variable types
 
 ## Configuring the Application
+
+Build the docker services with
+
+```bash
+make build
+```
 
 Run this command for the initial app configuration
 
@@ -37,6 +45,12 @@ Update the `.env` file and then run the migrations
 
 ```bash
 make art ARGS="migrate"
+```
+
+Update the admin user in the `database/seeders/DatabaseSeeder.php` file and run the seeds
+
+```bash
+make art ARGS="db:seed"
 ```
 
 ## Updating Services Ports
@@ -78,6 +92,52 @@ make art ARGS="make:module NAME"
 
 This will create a new module inside the `modules` folder with the same structure of the other modules. It will create
 the module disabled by default. To enable it, add the new module name to the `config/modules.php` file.
+
+## ExA Classes
+
+Inside the `exa` folder, there are a lot of classes provided by this **skeleton** to help you to develop your **API**.
+
+### DTOs
+
+* `DatatableDTO` - This DTO provides basic filters for fetching data for datatables.
+* `DateRangeDTO` - This is an extension of the `DatatableDTO` providing additional parameters for date filters.
+
+### Exceptions
+
+- `ExaException` - Base class that all your custom exceptions should extend, so it can be handled properly by the `app/Exceptions/Handler`.
+- `AccessDeniedException` - Exception used for actions that the user is not allowed to perform.
+
+### Http
+
+#### Middlewares
+
+* `BlockViewerUsers` - This middleware is a middleware applied to all routes that blocks any users with the role **VIEWER** to access any routes that are not **GET** routes.
+* `HasRole` - This middleware can be applied to routes that can be accessed only by users with a specific role or **ADMINS** that have full access.
+
+#### Responses
+
+* `ApiErrorResponse` - The class to be used to return any error responses, configured to be used by the `app/Exceptions/Handler`.
+* `ApiSuccessResponse` - The class to be used to return any success responses, configured to be used with **JSON Resources**.
+* `NoContentResponse` - The class to be used to return empty responses.
+
+### Models
+
+* `BaseModel` - Base class that all your models should extend, already configured with the `CommonQueries` and `LogChanges` Traits.
+* `ChangeLog` - Model for the table that logs all changes made on other models.
+* `CommonQueries` - This Trait provides a lot of methods for common queries that you can use with your models.
+* `HasUuidField` - This Trait provides UUID field support for models that don't want the UUID to be the primary key.
+* `LogChanges` - This Trait provides listeners for logging changes on the models. Check the class to know how you can customize your models with the properties of this Trait.
+
+### Services
+
+* `SlackClient` - Class to send notifications to **Slack**. You need to add the needed configuration in your env, check the `config/services.php` file for the slack service to know how to configure it.
+
+### Support
+
+* `Formatter` - Class that provides common values in constants and methods to format data in your application.
+* `Paginator` - Class that provides ways of manual paginating data.
+* `ChangeActions` - Enum used by the `LogChanges` Trait.
+* `SortOptions` - Enum for the sort order used by the `DatatableDTO`.
 
 ## Credits
 
