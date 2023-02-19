@@ -24,22 +24,22 @@ readonly class Formatter
 
     public const DEFAULT_CURRENCY = '$';
 
-    public function formatInt(mixed $value): string
+    public static function formatInt(mixed $value): string
     {
         return number_format($value);
     }
 
-    public function formatFloat(mixed $value): string
+    public static function formatFloat(mixed $value): string
     {
         return number_format($value, 2);
     }
 
-    public function formatMoney(mixed $value, string $currency = self::DEFAULT_CURRENCY): string
+    public static function formatMoney(mixed $value, string $currency = self::DEFAULT_CURRENCY): string
     {
-        return $currency.$this->formatFloat($value);
+        return $currency.self::formatFloat($value);
     }
 
-    public function formatBoolean(bool $value, string $trueValue = self::YES_LABEL, string $falseValue = self::NO_LABEL): string
+    public static function formatBoolean(bool $value, string $trueValue = self::YES_LABEL, string $falseValue = self::NO_LABEL): string
     {
         return $value ? $trueValue : $falseValue;
     }

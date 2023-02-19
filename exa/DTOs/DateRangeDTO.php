@@ -2,11 +2,27 @@
 
 namespace Exa\DTOs;
 
+use Carbon\CarbonImmutable;
 use Exa\Support\Formatter;
 use WendellAdriel\ValidatedDTO\Casting\CarbonImmutableCast;
 
 class DateRangeDTO extends DatatableDTO
 {
+    public ?CarbonImmutable $start_date;
+    public CarbonImmutable $end_date;
+
+    public function defineTimeframe(string $timeframe): self
+    {
+        if (! is_null($this->start_date)) {
+            return $this;
+        }
+
+        $this->start_date = CarbonImmutable::now()->sub($timeframe)->startOfDay();
+        $this->end_date = CarbonImmutable::now();
+
+        return $this;
+    }
+
     protected function rules(): array
     {
         return array_merge(parent::rules(), [
