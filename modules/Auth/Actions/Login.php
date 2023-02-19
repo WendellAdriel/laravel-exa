@@ -9,7 +9,7 @@ use Modules\Auth\DTOs\LoginDTO;
 use Modules\Auth\Models\User;
 use Modules\Auth\Models\UserLogin;
 
-final class Login
+final readonly class Login
 {
     private const TOKEN_TYPE = 'Bearer';
 

@@ -1,9 +1,9 @@
 <?php
 
-use Modules\Auth\Support\Roles;
+use Modules\Auth\Support\Role;
 
 it('logins successfully', function () {
-    $user = testUser(Roles::ADMIN);
+    $user = testUser(Role::ADMIN);
     $params = [
         'email' => $user->email,
         'password' => 'password',
@@ -14,7 +14,7 @@ it('logins successfully', function () {
 });
 
 it('fails to login with wrong credentials', function () {
-    $user = testUser(Roles::ADMIN);
+    $user = testUser(Role::ADMIN);
     $params = [
         'email' => $user->email,
         'password' => 'test',

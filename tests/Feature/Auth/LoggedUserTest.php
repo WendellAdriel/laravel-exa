@@ -1,9 +1,9 @@
 <?php
 
-use Modules\Auth\Support\Roles;
+use Modules\Auth\Support\Role;
 
 it('gets the logged user', function () {
-    $user = testUser(Roles::ADMIN);
+    $user = testUser(Role::ADMIN);
     $this->actingAs($user);
 
     expect($this->get('v1/auth/me')->json())

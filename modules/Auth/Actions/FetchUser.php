@@ -4,10 +4,10 @@ namespace Modules\Auth\Actions;
 
 use Modules\Auth\Models\User;
 
-final class FetchUser
+final readonly class FetchUser
 {
     public function handle(string $uuid): User
     {
-        // TODO
+        return User::getByOrFail('uuid', $uuid);
     }
 }

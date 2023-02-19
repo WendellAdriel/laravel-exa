@@ -2,7 +2,7 @@
 
 namespace Exa\DTOs;
 
-use Exa\Support\SortOptions;
+use Exa\Support\SortOption;
 use Illuminate\Validation\Rules\Enum;
 use WendellAdriel\ValidatedDTO\Casting\IntegerCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
@@ -32,7 +32,7 @@ class DatatableDTO extends ValidatedDTO
             'page' => ['sometimes', 'integer'],
             'per_page' => ['sometimes'],
             'sort_field' => ['sometimes', 'string'],
-            'sort_order' => ['sometimes', 'string', new Enum(SortOptions::class)],
+            'sort_order' => ['sometimes', 'string', new Enum(SortOption::class)],
             'search' => ['sometimes', 'string'],
         ];
     }

@@ -5,10 +5,13 @@ namespace Modules\Auth\Actions;
 use Modules\Auth\DTOs\CreateUserDTO;
 use Modules\Auth\Models\User;
 
-final class CreateUser
+final readonly class CreateUser
 {
     public function handle(CreateUserDTO $dto): User
     {
-        // TODO
+        $user = $dto->toModel(User::class);
+        $user->save();
+
+        return $user;
     }
 }

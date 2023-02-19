@@ -2,7 +2,7 @@
 
 namespace Exa\Support;
 
-enum SortOptions: string
+enum SortOption: string
 {
     case ASC = 'asc';
     case DESC = 'desc';

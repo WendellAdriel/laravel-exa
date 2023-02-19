@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Controllers\AuthController;
 use Modules\Auth\Controllers\UserController;
-use Modules\Auth\Support\Roles;
+use Modules\Auth\Support\Role;
 
 // Public Routes
 Route::post('auth/login', [AuthController::class, 'login']);
@@ -17,12 +17,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
-        Route::post('/', [UserController::class, 'store'])->middleware('role:'.Roles::MANAGER->value);
+        Route::post('/', [UserController::class, 'store'])->middleware('has_role:'.Role::MANAGER->value);
 
         Route::prefix('{uuid}')->group(function () {
             Route::get('/', [UserController::class, 'show']);
 
-            Route::middleware('role:'.Roles::MANAGER->value)->group(function () {
+            Route::middleware('has_role:'.Role::MANAGER->value)->group(function () {
                 Route::put('/', [UserController::class, 'update']);
                 Route::delete('/', [UserController::class, 'destroy']);
             });

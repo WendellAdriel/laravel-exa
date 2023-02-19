@@ -47,10 +47,10 @@ readonly class Datatable
     public static function applySort(Enumerable $list, DatatableDTO $dto): Enumerable
     {
         if (empty($dto->sort_field)) {
-            return $list;
+            return $list->values();
         }
 
-        $sorted = $dto->sort_order === SortOptions::ASC->value
+        $sorted = $dto->sort_order === SortOption::ASC->value
             ? $list->sortBy($dto->sort_field, SORT_NATURAL | SORT_FLAG_CASE)
             : $list->sortByDesc($dto->sort_field, SORT_NATURAL | SORT_FLAG_CASE);
 
@@ -74,6 +74,7 @@ readonly class Datatable
                     return true;
                 }
             }
+
             return false;
         });
 

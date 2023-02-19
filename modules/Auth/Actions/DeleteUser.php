@@ -2,10 +2,15 @@
 
 namespace Modules\Auth\Actions;
 
-final class DeleteUser
+final readonly class DeleteUser
 {
+    public function __construct(private FetchUser $fetchUser)
+    {
+    }
+
     public function handle(string $uuid): void
     {
-        // TODO
+        $user = $this->fetchUser->handle($uuid);
+        $user->delete();
     }
 }

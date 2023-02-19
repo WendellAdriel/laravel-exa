@@ -9,6 +9,7 @@ use WendellAdriel\ValidatedDTO\Casting\CarbonImmutableCast;
 class DateRangeDTO extends DatatableDTO
 {
     public ?CarbonImmutable $start_date;
+
     public CarbonImmutable $end_date;
 
     public function defineTimeframe(string $timeframe): self

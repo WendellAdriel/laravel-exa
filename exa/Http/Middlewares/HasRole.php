@@ -6,10 +6,15 @@ use Closure;
 use Exa\Exceptions\AccessDeniedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Auth\Support\Roles;
+use Modules\Auth\Actions\HasRole as HasRoleAction;
+use Modules\Auth\Support\Role;
 
-final class HasRole
+final readonly class HasRole
 {
+    public function __construct(private HasRoleAction $action)
+    {
+    }
+
     /**
      * @throws AccessDeniedException
      */
@@ -19,12 +24,10 @@ final class HasRole
         if (is_null($user)) {
             throw new AccessDeniedException();
         }
-        if ($user->is_admin) {
-            return $next($request);
+        if (! $this->action->handle($user, Role::from($role))) {
+            throw new AccessDeniedException();
         }
-        if ($user->hasRole(Roles::from($role))) {
-            return $next($request);
-        }
-        throw new AccessDeniedException();
+
+        return $next($request);
     }
 }

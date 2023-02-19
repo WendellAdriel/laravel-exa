@@ -2,7 +2,7 @@
 
 namespace Exa\Models;
 
-use Exa\Support\ChangeActions;
+use Exa\Support\ChangeAction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,13 +24,13 @@ trait LogChanges
             }
 
             if ($model->wasRecentlyCreated && $model->logCreateEvent) {
-                static::logChange($model, ChangeActions::CREATE);
+                static::logChange($model, ChangeAction::CREATE);
             } else {
                 if (! $model->getChanges()) {
                     return;
                 }
                 if ($model->logUpdateEvent) {
-                    static::logChange($model, ChangeActions::UPDATE);
+                    static::logChange($model, ChangeAction::UPDATE);
                 }
             }
         });
@@ -41,12 +41,12 @@ trait LogChanges
             }
 
             if ($model->logDeleteEvent) {
-                static::logChange($model, ChangeActions::DELETE);
+                static::logChange($model, ChangeAction::DELETE);
             }
         });
     }
 
-    public static function logChange(Model $model, ChangeActions $action): void
+    public static function logChange(Model $model, ChangeAction $action): void
     {
         ChangeLog::query()->create([
             'user_id' => Auth::check() ? Auth::user()->id : 0,
@@ -54,9 +54,9 @@ trait LogChanges
             'table' => $model->getTable(),
             'action' => $action->value,
             'payload' => $model->toJson(),
-            'old_data' => $action !== ChangeActions::CREATE ? json_encode($model->getOriginal()) : null,
-            'new_data' => $action !== ChangeActions::DELETE ? json_encode($model->getAttributes()) : null,
-            'changed_data' => $action === ChangeActions::UPDATE ? json_encode($model->getChanges()) : null,
+            'old_data' => $action !== ChangeAction::CREATE ? json_encode($model->getOriginal()) : null,
+            'new_data' => $action !== ChangeAction::DELETE ? json_encode($model->getAttributes()) : null,
+            'changed_data' => $action === ChangeAction::UPDATE ? json_encode($model->getChanges()) : null,
         ]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Exa\Support;
 
-enum ChangeActions: string
+enum ChangeAction: string
 {
     case CREATE = 'CREATED';
     case UPDATE = 'UPDATED';

@@ -1,9 +1,9 @@
 <?php
 
-use Modules\Auth\Support\Roles;
+use Modules\Auth\Support\Role;
 
 it('logout successfully', function () {
-    $this->actingAs(testUser(Roles::ADMIN));
+    $this->actingAs(testUser(Role::ADMIN));
 
     expect($this->post('v1/auth/logout'))
         ->assertNoContent();

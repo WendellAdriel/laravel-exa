@@ -13,7 +13,7 @@
 
 use Illuminate\Support\Str;
 use Modules\Auth\Models\User;
-use Modules\Auth\Support\Roles;
+use Modules\Auth\Support\Role;
 
 uses(
     Tests\TestCase::class,
@@ -46,7 +46,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function testUser(Roles $role): User
+function testUser(Role $role): User
 {
     $user = new User([
         'uuid' => Str::uuid()->toString(),

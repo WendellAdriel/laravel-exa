@@ -2,7 +2,7 @@
 
 namespace Modules\Auth\Support;
 
-enum Roles: string
+enum Role: string
 {
     case VIEWER = 'viewer';
     case REGULAR = 'regular';
