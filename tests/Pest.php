@@ -11,7 +11,6 @@
 |
 */
 
-use Illuminate\Support\Str;
 use Modules\Auth\Models\User;
 use Modules\Auth\Support\Role;
 
@@ -49,7 +48,6 @@ expect()->extend('toBeOne', function () {
 function testUser(Role $role): User
 {
     $user = new User([
-        'uuid' => Str::uuid()->toString(),
         'name' => fake()->name(),
         'email' => fake()->unique()->safeEmail(),
         'email_verified_at' => now(),
@@ -61,4 +59,14 @@ function testUser(Role $role): User
     $user->save();
 
     return $user;
+}
+
+function dumbUserData(): array
+{
+    return [
+        'name' => 'John Doe',
+        'email' => 'john.doe@example.com',
+        'password' => 's3CR3t@!',
+        'password_confirmation' => 's3CR3t@!',
+    ];
 }

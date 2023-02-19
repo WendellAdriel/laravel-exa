@@ -13,7 +13,7 @@ trait HasUuidField
         return $this->uuidFieldName ?? null;
     }
 
-    protected static function bootHasUuid()
+    protected static function bootHasUuidField()
     {
         static::creating(function ($model) {
             $uuidFieldName = $model->getUuidFieldName();

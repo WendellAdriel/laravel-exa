@@ -18,7 +18,7 @@ final readonly class UpdateUser
     {
         $authUser = Auth::user();
         $user = $this->fetchUser->handle($uuid);
-        $updateData = collect($dto->toArray())->filter(fn ($item) => ! empty($item))->toArray();
+        $updateData = collect($dto->toArray())->filter(fn ($item) => ! is_null($item))->toArray();
 
         if (! $authUser->is_admin) {
             unset($updateData['role'], $updateData['active']);
@@ -32,21 +32,24 @@ final readonly class UpdateUser
             unset($updateData['password']);
         }
 
-        $this->currentPasswordMatch($user, $updateData);
-        unset($updateData['current_password']);
-
+        $updateData = $this->buildPasswordData($user, $updateData);
         $user->fill($updateData);
         $user->save();
 
         return $user;
     }
 
-    private function currentPasswordMatch(User $user, array $updateData): void
+    private function buildPasswordData(User $user, array $updateData): array
     {
         if (! empty($updateData['password'])) {
             if (! Hash::check($updateData['current_password'], $user->password)) {
                 throw new AccessDeniedException();
             }
+            $updateData['password'] = Hash::make($updateData['password']);
         }
+
+        unset($updateData['current_password']);
+
+        return $updateData;
     }
 }

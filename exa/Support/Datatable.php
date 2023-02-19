@@ -3,81 +3,48 @@
 namespace Exa\Support;
 
 use Exa\DTOs\DatatableDTO;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Enumerable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 readonly class Datatable
 {
-    public static function manualPaginate(Enumerable $items, int $total, DatatableDTO $dto): array
-    {
-        $itemsTotal = $items->count();
-        $pageCount = $dto->getAll() ? 1 : (int) ceil($itemsTotal / $dto->per_page);
-        $data = $dto->getAll()
-            ? $items->all()
-            : $items->forPage($dto->page, $dto->per_page)->values()->all();
+    public const ALL_COLUMNS = ['*'];
 
-        return [
-            'data' => $data,
-            'pagination' => [
-                'page_count' => $pageCount,
-                'total' => $itemsTotal,
-                'total_all' => $total,
-            ],
-        ];
+    public const DEFAULT_PAGE_NAME = 'page';
+
+    public static function applyPagination(
+        Builder $builder,
+        DatatableDTO $dto,
+        array $columns = self::ALL_COLUMNS,
+        string $pageName = self::DEFAULT_PAGE_NAME
+    ): LengthAwarePaginator|Collection {
+        return $dto->getAll()
+            ? $builder->select($columns)->get()
+            : $builder->paginate($dto->per_page, $columns, $pageName, $dto->page);
     }
 
-    public static function manualPaginateStream(Enumerable $items, int $total, DatatableDTO $dto): array
-    {
-        $itemsTotal = $items->count();
-        $pageCount = $dto->getAll() ? 1 : (int) ceil($itemsTotal / $dto->per_page);
-        $data = $dto->getAll()
-            ? $items
-            : $items->forPage($dto->page, $dto->per_page)->values();
-
-        return [
-            'data' => $data,
-            'pagination' => [
-                'page_count' => $pageCount,
-                'total' => $itemsTotal,
-                'total_all' => $total,
-            ],
-        ];
-    }
-
-    public static function applySort(Enumerable $list, DatatableDTO $dto): Enumerable
+    public static function applySort(Builder $builder, DatatableDTO $dto): Builder
     {
         if (empty($dto->sort_field)) {
-            return $list->values();
+            return $builder;
         }
 
-        $sorted = $dto->sort_order === SortOption::ASC->value
-            ? $list->sortBy($dto->sort_field, SORT_NATURAL | SORT_FLAG_CASE)
-            : $list->sortByDesc($dto->sort_field, SORT_NATURAL | SORT_FLAG_CASE);
-
-        return $sorted->values();
+        return $dto->sort_order === SortOption::ASC->value
+            ? $builder->orderBy($dto->sort_field)
+            : $builder->orderByDesc($dto->sort_field);
     }
 
-    public static function applyFilter(Enumerable $list, DatatableDTO $dto, array $fieldsToSearch): Enumerable
+    public static function applyFilter(Builder $builder, DatatableDTO $dto, array $fieldsToSearch): Builder
     {
         if (empty($dto->search) || empty($fieldsToSearch)) {
-            return $list;
+            return $builder;
         }
 
-        $filtered = $list->filter(function ($item) use ($dto, $fieldsToSearch) {
+        return $builder->where(function (Builder $query) use ($dto, $fieldsToSearch) {
             foreach ($fieldsToSearch as $field) {
-                $itemArray = $item instanceof Model
-                    ? $item->toArray()
-                    : json_decode(json_encode($item), true);
-
-                $found = stripos($itemArray[$field], $dto->search) !== false;
-                if ($found) {
-                    return true;
-                }
+                $query->orwhere($field, 'LIKE', "%{$dto->search}%");
             }
-
-            return false;
         });
-
-        return $filtered->values();
     }
 }

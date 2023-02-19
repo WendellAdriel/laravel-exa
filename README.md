@@ -135,7 +135,7 @@ Inside the `exa` folder, there are a lot of classes provided by this **skeleton*
 ### Support
 
 * `Formatter` - Class that provides common values in constants and methods to format data in your application.
-* `Datatable` - Class that provides functions for manual paginating, sorting and filtering data.
+* `Datatable` - Class that provides functions for paginating, sorting and filtering data.
 * `ChangeAction` - Enum used by the `LogChanges` Trait.
 * `SortOption` - Enum for the sort order used by the `DatatableDTO`.
 

@@ -5,7 +5,7 @@ namespace Modules\Auth\Actions;
 use Modules\Auth\Models\User;
 use Modules\Auth\Support\Role;
 
-class HasRole
+final readonly class HasRole
 {
     public function handle(User $user, Role $role): bool
     {

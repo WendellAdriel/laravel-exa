@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('change_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->bigInteger('record_id');
             $table->string('table');
             $table->string('action', 50);

@@ -4,16 +4,18 @@ namespace Modules\Auth\Actions;
 
 use Exa\DTOs\DatatableDTO;
 use Exa\Support\Datatable;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Modules\Auth\Models\User;
 
 final readonly class FetchUsersList
 {
-    public function handle(DatatableDTO $dto): array
+    public function handle(DatatableDTO $dto): LengthAwarePaginator|Collection
     {
-        $users = User::getAll();
-        $filtered = Datatable::applyFilter($users, $dto, ['email', 'name', 'role']);
-        $result = Datatable::applySort($filtered, $dto);
+        $query = User::query();
+        $query = Datatable::applyFilter($query, $dto, ['email', 'name', 'role']);
+        $query = Datatable::applySort($query, $dto);
 
-        return Datatable::manualPaginate($result, $users->count(), $dto);
+        return Datatable::applyPagination($query, $dto);
     }
 }

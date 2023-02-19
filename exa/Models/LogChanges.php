@@ -16,7 +16,7 @@ trait LogChanges
 
     public bool $logDeleteEvent = true;
 
-    public static function bootLogsChanges()
+    public static function bootLogChanges()
     {
         static::saved(function (Model $model) {
             if ($model->disableChangeLogs) {
@@ -49,7 +49,7 @@ trait LogChanges
     public static function logChange(Model $model, ChangeAction $action): void
     {
         ChangeLog::query()->create([
-            'user_id' => Auth::check() ? Auth::user()->id : 0,
+            'user_id' => Auth::check() ? Auth::user()->id : null,
             'record_id' => empty($model->id) ? 0 : $model->id,
             'table' => $model->getTable(),
             'action' => $action->value,

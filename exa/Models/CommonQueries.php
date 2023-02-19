@@ -75,6 +75,11 @@ trait CommonQueries
             ->delete();
     }
 
+    public static function getModelTable(): string
+    {
+        return (new static)->getTable();
+    }
+
     private static function getByParamsBase(array $params, string $defaultCompareType = '=', bool $withTrashed = false): Builder
     {
         $query = self::newQueryBuilder();

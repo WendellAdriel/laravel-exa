@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Exa\DTOs\DatatableDTO;
 use Exa\Http\Responses\ApiSuccessResponse;
 use Exa\Http\Responses\NoContentResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Modules\Auth\Actions\CreateUser;
 use Modules\Auth\Actions\DeleteUser;
 use Modules\Auth\Actions\FetchUser;
@@ -18,11 +20,9 @@ use Modules\Auth\Resources\UserResource;
 
 class UserController extends Controller
 {
-    public function index(Request $request, FetchUsersList $action): ApiSuccessResponse
+    public function index(Request $request, FetchUsersList $action): JsonResponse
     {
-        return new ApiSuccessResponse(
-            UserResource::collection($action->handle(DatatableDTO::fromRequest($request)))
-        );
+        return UserResource::collection($action->handle(DatatableDTO::fromRequest($request)))->response();
     }
 
     public function show(string $uuid, FetchUser $action): ApiSuccessResponse
@@ -33,7 +33,8 @@ class UserController extends Controller
     public function store(Request $request, CreateUser $action): ApiSuccessResponse
     {
         return new ApiSuccessResponse(
-            new UserResource($action->handle(CreateUserDTO::fromRequest($request)))
+            new UserResource($action->handle(CreateUserDTO::fromRequest($request))),
+            Response::HTTP_CREATED
         );
     }
 

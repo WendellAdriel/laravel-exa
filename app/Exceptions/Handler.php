@@ -6,6 +6,7 @@ use Exa\Exceptions\ExaException;
 use Exa\Http\Responses\ApiErrorResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -85,8 +86,12 @@ class Handler extends ExceptionHandler
 
     private function error(Throwable $exception, ?int $code = null, string|array|null $message = null): ApiErrorResponse
     {
+        $finalMessage = is_array($message)
+            ? implode(', ', Arr::flatten($message))
+            : $message;
+
         return new ApiErrorResponse(
-            $message ?? $exception->getMessage(),
+            $finalMessage ?? $exception->getMessage(),
             $exception,
             $code ?? $exception->getCode()
         );
