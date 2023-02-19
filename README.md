@@ -11,6 +11,16 @@
 <a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/badge/Laravel-10.x-brightgreen.svg?style=flat-square" alt="Laravel Version"></a>
 </p>
 
+<p align="center">
+    <a href="#features">Features</a> |
+    <a href="#using-the-template">Usage</a> |
+    <a href="#configuring-the-application">Configuration</a> |
+    <a href="#application-structure">Structure</a> |
+    <a href="#exa-classes">ExA Classes</a> |
+    <a href="#credits">Credits</a> |
+    <a href="#contributing">Contributing</a>
+</p>
+
 ## Features
 
 * Your API running on the latest version of Laravel and PHP
@@ -26,6 +36,26 @@
 * Users management out-of-the-box with simple roles system
 * Logs on DB for user logins and for actions made on models
 * [Strictus](https://github.com/php-strictus/strictus) for enforcing local variable types
+
+## Using the Template
+
+There are three ways of using this template:
+
+### Composer (Recommended)
+
+```bash
+composer create-project --prefer-dist wendelladriel/laravel-exa my-app
+```
+
+### GitHub Template
+
+Click the `Use this template` button in the GitHub repository page.
+
+### Git Clone
+
+```bash
+git clone git@github.com:WendellAdriel/laravel-exa.git my-app && cd my-app && rm -rf .git
+```
 
 ## Configuring the Application
 
@@ -53,7 +83,7 @@ Update the admin user in the `database/seeders/DatabaseSeeder.php` file and run 
 make art ARGS="db:seed"
 ```
 
-## Updating Services Ports
+### Updating Services Ports
 
 You can update which ports the services will connect to your machine by updating these variables in the `.env` file
 
@@ -63,14 +93,6 @@ You can update which ports the services will connect to your machine by updating
 * `REDIS_EXTERNAL_PORT`
 * `MAILPIT_EXTERNAL_PORT_SMTP`
 * `MAILPIT_EXTERNAL_PORT_HTTP`
-
-## Commands Available
-
-Use this command to see all the commands available
-
-```bash
-make
-```
 
 ## Application Structure
 
@@ -82,7 +104,7 @@ The `modules` folder contains the code for your application. By default, you hav
 and **User management out-of-the-box**. It also provides a **Common** module that you can put shared logic for
 your application.
 
-## Creating Modules
+### Creating Modules
 
 To create new modules you can use this command
 
@@ -92,6 +114,26 @@ make art ARGS="make:module NAME"
 
 This will create a new module inside the `modules` folder with the same structure of the other modules. It will create
 the module disabled by default. To enable it, add the new module name to the `config/modules.php` file.
+
+### Commands Available
+
+For running Pint in the whole codebase use
+
+```bash
+make lint
+```
+
+For running the test suite use
+
+```bash
+make test
+```
+
+Use this command to see all the commands available
+
+```bash
+make
+```
 
 ## ExA Classes
 
@@ -134,8 +176,8 @@ Inside the `exa` folder, there are a lot of classes provided by this **skeleton*
 
 ### Support
 
-* `Formatter` - Class that provides common values in constants and methods to format data in your application.
 * `Datatable` - Class that provides functions for paginating, sorting and filtering data.
+* `Formatter` - Class that provides common values in constants and methods to format data in your application.
 * `ChangeAction` - Enum used by the `LogChanges` Trait.
 * `SortOption` - Enum for the sort order used by the `DatatableDTO`.
 
