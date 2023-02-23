@@ -35,8 +35,8 @@ class MakeModuleCommand extends Command
     private function moduleStructure(): array
     {
         return [
-            'Actions', 'Commands', 'Controllers', 'DTOs', 'Events', 'Listeners', 'Models',
-            'Requests', 'Resources', 'Responses', 'Support', 'Traits',
+            'Actions', 'Commands', 'Controllers', 'DTOs', 'Events', 'Exceptions', 'Listeners',
+            'Models', 'Requests', 'Resources', 'Responses', 'Support', 'Traits',
         ];
     }
 
