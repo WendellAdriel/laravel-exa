@@ -88,7 +88,7 @@ make art ARGS="db:seed"
 Run this command to start the app
 
 ```bash
-make configure
+make start
 ```
 
 After completion, verify by visiting the endpoint below
