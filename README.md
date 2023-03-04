@@ -83,6 +83,20 @@ Update the admin user in the `database/seeders/DatabaseSeeder.php` file and run 
 make art ARGS="db:seed"
 ```
 
+## Running the Application
+
+Run this command to start the app
+
+```bash
+make configure
+```
+
+After completion, verify by visiting the endpoint below
+
+```bash
+http://localhost:8000/
+```
+
 ### Updating Services Ports
 
 You can update which ports the services will connect to your machine by updating these variables in the `.env` file
