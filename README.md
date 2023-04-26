@@ -83,6 +83,14 @@ Update the admin user in the `database/seeders/DatabaseSeeder.php` file and run 
 make art ARGS="db:seed"
 ```
 
+### M1/2 Processor Config
+
+If you're using a **Mac** with **M1/2 processor**, you need to update the `M1_PROCESSOR` env variable to `true`
+
+### XDebug Config
+
+By default, **XDebug** will be installed, if you want to disable it, update the `XDEBUG_ENABLED` env variable to `false`
+
 ### Updating Services Ports
 
 You can update which ports the services will connect to your machine by updating these variables in the `.env` file

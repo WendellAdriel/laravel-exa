@@ -8,6 +8,9 @@ services:
         build:
             context: .
             dockerfile: docker/app/Dockerfile
+            args:
+                - M1_PROCESSOR=${M1_PROCESSOR}
+                - XDEBUG_ENABLED=${XDEBUG_ENABLED}
         volumes:
             - ./:/var/www
         ports:

@@ -8,6 +8,14 @@ LABEL description="Laravel ExA"
 # Set the web root from which nginx serves our app
 ENV WEB_DOCUMENT_ROOT="/var/www/public"
 
+ARG M1_PROCESSOR=false
+
+RUN if [ ${M1_PROCESSOR} = true ]; then \
+    wget -O "/usr/local/bin/go-replace" "https://github.com/webdevops/goreplace/releases/download/1.1.2/gr-arm64-linux" \
+        && chmod +x "/usr/local/bin/go-replace" \
+        && "/usr/local/bin/go-replace" --version \
+;fi
+
 # Install various packages, php extensions and composer
 RUN apt-get update && apt-get install -y \
     libmcrypt-dev \
@@ -22,6 +30,12 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo_mysql zip pgsql pdo pdo_pgsql gd \
     && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+
+ARG XDEBUG_ENABLED=false
+# XDebug
+RUN if [ ${XDEBUG_ENABLED} = true ]; then \
+  pecl install xdebug && docker-php-ext-enable xdebug \
+;fi
 
 WORKDIR /var/www
 
