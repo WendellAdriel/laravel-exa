@@ -25,10 +25,10 @@
         "ext-curl": "*",
         "guzzlehttp/guzzle": "^7.5.1",
         "laravel/framework": "^10.9.0",
-        "laravel/sanctum": "^3.2.3",
+        "laravel/sanctum": "^3.2.5",
         "laravel/tinker": "^2.8.1",
         "strictus/strictus": "^1.0",
-        "wendelladriel/laravel-validated-dto": "^2.6.0"
+        "wendelladriel/laravel-validated-dto": "^2.7.0"
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "v3.0.0-alpha.1",
@@ -37,10 +37,10 @@
         "laravel/sail": "^1.21.5",
         "mockery/mockery": "^1.5.1",
         "nunomaduro/collision": "^7.5.2",
-        "pestphp/pest": "^2.5.3",
+        "pestphp/pest": "^2.6.0",
         "pestphp/pest-plugin-laravel": "^2.0.0",
         "phpunit/phpunit": "^10.1.2",
-        "spatie/laravel-ignition": "^2.1"
+        "spatie/laravel-ignition": "^2.1.2"
     },
     "autoload": {
         "psr-4": {
