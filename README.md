@@ -102,6 +102,26 @@ You can update which ports the services will connect to your machine by updating
 * `MAILPIT_EXTERNAL_PORT_SMTP`
 * `MAILPIT_EXTERNAL_PORT_HTTP`
 
+## Running the Application
+
+Run this command to start the application
+
+```bash
+make start
+```
+
+After completion, you can access the application at
+
+```bash
+http://localhost:APP_EXTERNAL_PORT
+```
+
+By default, the `APP_EXTERNAL_PORT` is `8000`
+
+```bash
+http://localhost:8000
+```
+
 ## Application Structure
 
 The `app` folder contains only the files of a default **Laravel** installation.

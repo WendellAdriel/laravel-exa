@@ -31,11 +31,12 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql zip pgsql pdo pdo_pgsql gd \
     && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-ARG XDEBUG_ENABLED=false
+ARG XDEBUG_ENABLED=true
 # XDebug
 RUN if [ ${XDEBUG_ENABLED} = true ]; then \
   pecl install xdebug && docker-php-ext-enable xdebug \
 ;fi
+COPY ./docker/app/config/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 WORKDIR /var/www
 
