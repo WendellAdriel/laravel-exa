@@ -91,6 +91,8 @@ If you're using a **Mac** with **M1/2 processor**, you need to update the `M1_PR
 
 By default, **XDebug** will be installed, if you want to disable it, update the `XDEBUG_ENABLED` env variable to `false`
 
+You can also configure **XDebug** by updating the `docker/app/config/xdebug.ini` file
+
 ### Updating Services Ports
 
 You can update which ports the services will connect to your machine by updating these variables in the `.env` file
