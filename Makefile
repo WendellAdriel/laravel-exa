@@ -12,12 +12,18 @@ stop: ## Shut down the containers
 	&& rm -f docker/redis/data/dump.rdb
 
 build: ## Build all docker images OR a specific image by providing the service name via: make build SERVICE_NAME=<service>
-	docker compose build $(SERVICE_NAME)
+	cp .env.example .env \
+	&& docker compose build $(SERVICE_NAME)
+
+db-start: ## Spin up the DB container for migrations and seeding
+	docker compose up mysql -d
+
+db-stop: ## Shut down the DB container
+	docker compose stop mysql
 
 ##@ [Application]
 configure: ## Configures the application when setting it for the first time
-	cp .env.example .env \
-	&& make install \
+	make install \
 	&& make art ARGS="key:generate --ansi"
 
 composer: ## Run composer commands. Specify the command e.g. via make composer ARGS="install|update|require <dependency>"

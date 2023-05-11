@@ -71,7 +71,15 @@ Run this command for the initial app configuration
 make configure
 ```
 
-Update the `.env` file and then run the migrations
+### Database Config
+
+Start the DB container with
+
+```bash
+make db-start
+```
+
+Run the migrations
 
 ```bash
 make art ARGS="migrate"
@@ -81,6 +89,12 @@ Update the admin user in the `database/seeders/DatabaseSeeder.php` file and run 
 
 ```bash
 make art ARGS="db:seed"
+```
+
+Stop the DB container with
+
+```bash
+make db-stop
 ```
 
 ### M1/2 Processor Config
