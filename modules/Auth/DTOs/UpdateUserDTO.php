@@ -4,8 +4,8 @@ namespace Modules\Auth\DTOs;
 
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
-use OpenApi\Attributes as OA;
 use Modules\Auth\Support\Role;
+use OpenApi\Attributes as OA;
 use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
