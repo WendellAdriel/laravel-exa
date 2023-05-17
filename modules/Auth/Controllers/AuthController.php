@@ -23,18 +23,12 @@ class AuthController extends Controller
     #[OA\RequestBody(
         description: 'Login credentials',
         required: true,
-        content: new OA\JsonContent(properties: [
-            new OA\Property(property: 'email', type: 'string'),
-            new OA\Property(property: 'password', type: 'string'),
-        ]),
+        content: new OA\JsonContent(ref: '#/components/schemas/login-dto'),
     )]
     #[OA\Response(
         response: '200',
         description: 'Successful login',
-        content: new OA\JsonContent(properties: [
-            new OA\Property(property: 'type', type: 'string'),
-            new OA\Property(property: 'token', type: 'string'),
-        ]),
+        content: new OA\JsonContent(ref: '#/components/schemas/login-response'),
     )]
     public function login(Request $request, Login $action): ApiSuccessResponse
     {
@@ -69,15 +63,7 @@ class AuthController extends Controller
     #[OA\Response(
         response: '200',
         description: 'The current user',
-        content: new OA\JsonContent(properties: [
-            new OA\Property(property: 'uuid', type: 'string'),
-            new OA\Property(property: 'name', type: 'string'),
-            new OA\Property(property: 'email', type: 'string'),
-            new OA\Property(property: 'role', type: 'string'),
-            new OA\Property(property: 'active', type: 'boolean'),
-            new OA\Property(property: 'created_at', type: 'string', format: 'date-time'),
-            new OA\Property(property: 'updated_at', type: 'string', format: 'date-time'),
-        ]),
+        content: new OA\JsonContent(ref: '#/components/schemas/user'),
     )]
     public function user(): ApiSuccessResponse
     {

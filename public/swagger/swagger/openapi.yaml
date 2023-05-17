@@ -15,22 +15,14 @@ paths:
         content:
           application/json:
             schema:
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-              type: object
+              $ref: '#/components/schemas/login-dto'
       responses:
         '200':
           description: 'Successful login'
           content:
             application/json:
               schema:
-                properties:
-                  type: { type: string }
-                  token: { type: string }
-                type: object
+                $ref: '#/components/schemas/login-response'
   /v1/auth/logout:
     post:
       tags:
@@ -55,19 +47,45 @@ paths:
           content:
             application/json:
               schema:
-                properties:
-                  uuid: { type: string }
-                  name: { type: string }
-                  email: { type: string }
-                  role: { type: string }
-                  active: { type: boolean }
-                  created_at: { type: string, format: date-time }
-                  updated_at: { type: string, format: date-time }
-                type: object
+                $ref: '#/components/schemas/user'
       security:
         -
           jwt: []
 components:
+  schemas:
+    login-dto:
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      type: object
+    login-response:
+      properties:
+        type:
+          type: string
+        token:
+          type: string
+      type: object
+    user:
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      type: object
   securitySchemes:
     jwt:
       type: http
