@@ -23,23 +23,24 @@
     "require": {
         "php": "^8.2",
         "ext-curl": "*",
-        "guzzlehttp/guzzle": "^7.5.1",
-        "laravel/framework": "^10.10.0",
+        "guzzlehttp/guzzle": "^7.6.1",
+        "laravel/framework": "^10.11.0",
         "laravel/sanctum": "^3.2.5",
         "laravel/tinker": "^2.8.1",
         "strictus/strictus": "^1.0",
-        "wendelladriel/laravel-validated-dto": "^2.7.0"
+        "wendelladriel/laravel-validated-dto": "^2.9.0",
+        "zircote/swagger-php": "^4.7.10"
     },
     "require-dev": {
         "brainmaestro/composer-git-hooks": "v3.0.0-alpha.1",
-        "fakerphp/faker": "^1.21",
+        "fakerphp/faker": "^1.22",
         "laravel/pint": "^1.10",
         "laravel/sail": "^1.22.0",
         "mockery/mockery": "^1.5.1",
         "nunomaduro/collision": "^7.5.2",
-        "pestphp/pest": "^2.6.0",
+        "pestphp/pest": "^2.6.1",
         "pestphp/pest-plugin-laravel": "^2.0.0",
-        "phpunit/phpunit": "^10.1.2",
+        "phpunit/phpunit": "^10.1.3",
         "spatie/laravel-ignition": "^2.1.2"
     },
     "autoload": {
