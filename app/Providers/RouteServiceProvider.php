@@ -11,7 +11,17 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use OpenApi\Attributes as OA;
 
+#[OA\Info(title: 'Exa API', version: '1.0')]
+#[OA\SecurityScheme(
+    securityScheme: 'jwt',
+    name: 'jwt',
+    in: 'header',
+    type: 'http',
+    scheme: 'bearer',
+    bearerFormat: 'JWT'
+)]
 class RouteServiceProvider extends ServiceProvider
 {
     /**

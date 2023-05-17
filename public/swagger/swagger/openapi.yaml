@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: 'Exa API'
+  version: '1.0'
+paths:
+  /v1/auth/login:
+    post:
+      tags:
+        - Auth
+      description: Login
+      operationId: 10addabada2b56dde78d06391a099e9d
+      requestBody:
+        description: 'Login credentials'
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              type: object
+      responses:
+        '200':
+          description: 'Successful login'
+          content:
+            application/json:
+              schema:
+                properties:
+                  type: { type: string }
+                  token: { type: string }
+                type: object
+  /v1/auth/logout:
+    post:
+      tags:
+        - Auth
+      description: Logout
+      operationId: c0f6c2f74906c1e48445df3b87cc7007
+      responses:
+        '204':
+          description: 'Successful logout'
+      security:
+        -
+          jwt: []
+  /v1/auth/me:
+    get:
+      tags:
+        - Auth
+      description: 'Get current user'
+      operationId: e2badb77657f48a90c391f515f7f81ec
+      responses:
+        '200':
+          description: 'The current user'
+          content:
+            application/json:
+              schema:
+                properties:
+                  uuid: { type: string }
+                  name: { type: string }
+                  email: { type: string }
+                  role: { type: string }
+                  active: { type: boolean }
+                  created_at: { type: string, format: date-time }
+                  updated_at: { type: string, format: date-time }
+                type: object
+      security:
+        -
+          jwt: []
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      name: jwt
+      in: header
+      bearerFormat: JWT
+      scheme: bearer

@@ -45,8 +45,12 @@ lint: ## Run the Linter. Pass arguments and options via make lint ARGS="-q"
 test: ## Run all the tests. Pass arguments and options via make test ARGS="--filter=ExampleTest"
 	docker compose run --rm app ./vendor/bin/pest $(ARGS)
 
+swagger: ## Generate the swagger documentation
+	docker compose run --rm app sh ./tools/swagger.sh
+
 prepare: ## Run tools to prepare for commit
-	docker compose run --rm app ./vendor/bin/pint --dirty
+	docker compose run --rm app ./vendor/bin/pint --dirty \
+	&& make swagger
 
 hooks: ## Run the CGHooks commands. Specify the command e.g. via make hooks ARGS="update"
 	docker-compose run --rm app ./vendor/bin/cghooks $(ARGS)
