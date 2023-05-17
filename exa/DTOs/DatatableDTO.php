@@ -4,9 +4,43 @@ namespace Exa\DTOs;
 
 use Exa\Support\SortOption;
 use Illuminate\Validation\Rules\Enum;
+use OpenApi\Attributes as OA;
 use WendellAdriel\ValidatedDTO\Casting\IntegerCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
+#[OA\Schema(
+    schema: 'pagination-links',
+    properties: [
+        new OA\Property(property: 'first', type: 'string'),
+        new OA\Property(property: 'last', type: 'string'),
+        new OA\Property(property: 'prev', type: 'string'),
+        new OA\Property(property: 'next', type: 'string'),
+    ],
+)]
+
+#[OA\Schema(
+    schema: 'pagination-meta',
+    properties: [
+        new OA\Property(property: 'current_page', type: 'integer'),
+        new OA\Property(property: 'from', type: 'integer'),
+        new OA\Property(property: 'last_page', type: 'integer'),
+        new OA\Property(property: 'path', type: 'string'),
+        new OA\Property(property: 'per_page', type: 'integer'),
+        new OA\Property(property: 'to', type: 'integer'),
+        new OA\Property(property: 'total', type: 'integer'),
+        new OA\Property(
+            property: 'links',
+            type: 'array',
+            items: new OA\Items(
+                properties: [
+                    new OA\Property(property: 'url', type: 'string'),
+                    new OA\Property(property: 'label', type: 'string'),
+                    new OA\Property(property: 'active', type: 'boolean'),
+                ],
+            ),
+        ),
+    ],
+)]
 class DatatableDTO extends ValidatedDTO
 {
     public const PER_PAGE_ALL = 'all';

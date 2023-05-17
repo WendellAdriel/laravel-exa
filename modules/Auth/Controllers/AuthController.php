@@ -20,16 +20,22 @@ class AuthController extends Controller
         description: 'Login',
         tags: ['Auth'],
     )]
+
     #[OA\RequestBody(
         description: 'Login credentials',
         required: true,
-        content: new OA\JsonContent(ref: '#/components/schemas/login-dto'),
+        content: new OA\JsonContent(ref: '#/components/schemas/login'),
     )]
+
     #[OA\Response(
         response: '200',
         description: 'Successful login',
         content: new OA\JsonContent(ref: '#/components/schemas/login-response'),
     )]
+    #[OA\Response(response: '401', description: 'Unauthorized')]
+    #[OA\Response(response: '403', description: 'Forbidden')]
+    #[OA\Response(response: '422', description: 'Invalid Data')]
+    #[OA\Response(response: '500', description: 'Server Error')]
     public function login(Request $request, Login $action): ApiSuccessResponse
     {
         return new ApiSuccessResponse(
@@ -43,10 +49,11 @@ class AuthController extends Controller
         security: [['jwt' => []]],
         tags: ['Auth'],
     )]
-    #[OA\Response(
-        response: '204',
-        description: 'Successful logout',
-    )]
+
+    #[OA\Response(response: '204', description: 'Successful logout')]
+    #[OA\Response(response: '401', description: 'Unauthorized')]
+    #[OA\Response(response: '403', description: 'Forbidden')]
+    #[OA\Response(response: '500', description: 'Server Error')]
     public function logout(): NoContentResponse
     {
         Auth::guard('web')->logout();
@@ -60,11 +67,15 @@ class AuthController extends Controller
         security: [['jwt' => []]],
         tags: ['Auth'],
     )]
+
     #[OA\Response(
         response: '200',
         description: 'The current user',
         content: new OA\JsonContent(ref: '#/components/schemas/user'),
     )]
+    #[OA\Response(response: '401', description: 'Unauthorized')]
+    #[OA\Response(response: '403', description: 'Forbidden')]
+    #[OA\Response(response: '500', description: 'Server Error')]
     public function user(): ApiSuccessResponse
     {
         return new ApiSuccessResponse(new UserResource(Auth::user()));

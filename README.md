@@ -25,6 +25,7 @@
 
 * Your API running on the latest version of Laravel and PHP
 * Docker config with PHP, Nginx, MySQL, Redis and Mailpit
+* API Documentation with Swagger
 * Laravel Pint configuration
 * Pest v2 for Tests
 * Git Hooks for linting files

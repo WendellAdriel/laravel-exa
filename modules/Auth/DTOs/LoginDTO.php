@@ -6,7 +6,8 @@ use OpenApi\Attributes as OA;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 #[OA\Schema(
-    schema: 'login-dto',
+    schema: 'login',
+    required: ['email', 'password'],
     properties: [
         new OA\Property(property: 'email', type: 'string'),
         new OA\Property(property: 'password', type: 'string'),
