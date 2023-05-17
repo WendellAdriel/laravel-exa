@@ -58,6 +58,13 @@
         }
     },
     "scripts": {
+        "lint": ["pint"],
+        "test": ["pest"],
+        "swagger": ["sh ./tools/swagger.sh"],
+        "prepare": [
+            "pint --dirty",
+            "@swagger"
+        ],
         "post-install-cmd": [
             "cghooks add --ignore-lock"
         ],
