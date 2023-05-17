@@ -5,8 +5,19 @@ namespace Modules\Auth\DTOs;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 use Modules\Auth\Support\Role;
+use OpenApi\Attributes as OA;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
+#[OA\Schema(
+    schema: 'create-user',
+    required: ['name', 'email', 'password'],
+    properties: [
+        new OA\Property(property: 'name', type: 'string'),
+        new OA\Property(property: 'email', type: 'string'),
+        new OA\Property(property: 'password', type: 'string'),
+        new OA\Property(property: 'role', type: 'string', default: 'regular', enum: ['viewer', 'regular', 'manager', 'admin']),
+    ],
+)]
 class CreateUserDTO extends ValidatedDTO
 {
     public string $name;

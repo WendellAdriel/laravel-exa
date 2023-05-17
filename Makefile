@@ -39,14 +39,17 @@ composer-bump: ## Updates the dependencies and the min version on composer.json
 art: ## Run artisan commands. Specify the command e.g. via make art ARGS="tinker"
 	docker compose run --rm app php artisan $(ARGS)
 
-lint: ## Run the Linter. Pass arguments and options via make lint ARGS="-q"
-	docker compose run --rm app ./vendor/bin/pint $(ARGS)
+lint: ## Run the Linter.
+	docker compose run --rm app composer lint
 
-test: ## Run all the tests. Pass arguments and options via make test ARGS="--filter=ExampleTest"
-	docker compose run --rm app ./vendor/bin/pest $(ARGS)
+test: ## Run all the tests.
+	docker compose run --rm app composer test
+
+swagger: ## Generate the swagger documentation
+	docker compose run --rm app composer swagger
 
 prepare: ## Run tools to prepare for commit
-	docker compose run --rm app ./vendor/bin/pint --dirty
+	docker compose run --rm app composer prepare
 
 hooks: ## Run the CGHooks commands. Specify the command e.g. via make hooks ARGS="update"
 	docker-compose run --rm app ./vendor/bin/cghooks $(ARGS)
