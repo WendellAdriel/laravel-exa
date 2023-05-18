@@ -114,6 +114,7 @@ You can update which ports the services will connect to your machine by updating
 
 * `APP_EXTERNAL_PORT`
 * `APP_EXTERNAL_PORT_SSL`
+* `SWAGGER_EXTERNAL_PORT`
 * `DB_EXTERNAL_PORT`
 * `REDIS_EXTERNAL_PORT`
 * `MAILPIT_EXTERNAL_PORT_SMTP`
@@ -137,6 +138,18 @@ By default, the `APP_EXTERNAL_PORT` is `8000`
 
 ```bash
 http://localhost:8000
+```
+
+You can check the Swagger docs at
+
+```bash
+http://localhost:SWAGGER_EXTERNAL_PORT
+```
+
+By default, the `SWAGGER_EXTERNAL_PORT` is `8080`
+
+```bash
+http://localhost:8080
 ```
 
 ## Application Structure

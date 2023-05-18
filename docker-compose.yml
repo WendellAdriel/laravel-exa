@@ -59,6 +59,17 @@ services:
         networks:
             - laravel-exa
 
+    # SWAGGER
+    swagger:
+        image: wendelladriel/laravel-exa-swagger
+        container_name: laravel-exa-swagger
+        build:
+            context: .
+            dockerfile: docker/swagger/Dockerfile
+        restart: always
+        ports:
+            - "${SWAGGER_EXTERNAL_PORT}:8080"
+
 networks:
     laravel-exa:
         driver: bridge

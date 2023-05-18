@@ -247,7 +247,7 @@ paths:
             type: string
       responses:
         '204':
-          description: 'Successful logout'
+          description: 'User deleted'
         '401':
           description: Unauthorized
         '403':

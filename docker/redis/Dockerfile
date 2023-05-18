@@ -1,7 +1,7 @@
 FROM redis
 
 RUN mkdir -p /usr/local/etc/redis
-COPY docker/redis/redis.conf /usr/local/etc/redis/redis.conf
+COPY docker/redis/config/redis.conf /usr/local/etc/redis/redis.conf
 
 VOLUME /data
 
