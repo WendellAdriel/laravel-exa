@@ -17,6 +17,7 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
         new OA\Property(property: 'name', type: 'string'),
         new OA\Property(property: 'email', type: 'string'),
         new OA\Property(property: 'password', type: 'string'),
+        new OA\Property(property: 'password_confirmation', type: 'string'),
         new OA\Property(property: 'role', type: 'string', default: 'regular', enum: ['viewer', 'regular', 'manager', 'admin']),
     ],
 )]

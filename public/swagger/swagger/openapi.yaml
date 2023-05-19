@@ -312,6 +312,8 @@ components:
           type: string
         password:
           type: string
+        password_confirmation:
+          type: string
         role:
           type: string
           default: regular
@@ -340,6 +342,8 @@ components:
         current_password:
           type: string
         password:
+          type: string
+        password_confirmation:
           type: string
         role:
           type: string
