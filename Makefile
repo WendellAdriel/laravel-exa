@@ -7,13 +7,23 @@ help:
 start: ## Spin up the containers and run the app UI in watch mode
 	docker compose up -d
 
-stop: ## Shut down the containers
+stop: ## Stop the containers
+	docker compose stop \
+	&& rm -f docker/redis/data/dump.rdb
+
+status: ## Status the containers
+	docker compose ps
+
+down: ## Shut down the containers
 	docker compose down \
 	&& rm -f docker/redis/data/dump.rdb
 
+down-with-vol: ## Shut down the containers and removed volumes
+	docker compose down --volumes \
+	&& rm -f docker/redis/data/dump.rdb
+
 build: ## Build all docker images OR a specific image by providing the service name via: make build SERVICE_NAME=<service>
-	cp .env.example .env \
-	&& docker compose build $(SERVICE_NAME)
+	docker compose build $(SERVICE_NAME)
 
 db-start: ## Spin up the DB container for migrations and seeding
 	docker compose up mysql -d
@@ -23,7 +33,8 @@ db-stop: ## Shut down the DB container
 
 ##@ [Application]
 configure: ## Configures the application when setting it for the first time
-	make install \
+	[ -f .env ] || cp .env.example .env \
+	&& make install \
 	&& make art ARGS="key:generate --ansi"
 
 composer: ## Run composer commands. Specify the command e.g. via make composer ARGS="install|update|require <dependency>"
