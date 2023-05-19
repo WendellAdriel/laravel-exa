@@ -14,16 +14,13 @@ stop: ## Stop the containers
 status: ## Status the containers
 	docker compose ps
 
-down: ## Shut down the containers
-	docker compose down \
-	&& rm -f docker/redis/data/dump.rdb
-
-down-with-vol: ## Shut down the containers and removed volumes
-	docker compose down --volumes \
+down: ## Shut down the containers with args for removed volumes
+	docker compose down $(ARGS) \
 	&& rm -f docker/redis/data/dump.rdb
 
 build: ## Build all docker images OR a specific image by providing the service name via: make build SERVICE_NAME=<service>
-	docker compose build $(SERVICE_NAME)
+	[ -f .env ] || cp .env.example .env \
+	&& docker compose build $(SERVICE_NAME)
 
 db-start: ## Spin up the DB container for migrations and seeding
 	docker compose up mysql -d
@@ -33,8 +30,7 @@ db-stop: ## Shut down the DB container
 
 ##@ [Application]
 configure: ## Configures the application when setting it for the first time
-	[ -f .env ] || cp .env.example .env \
-	&& make install \
+	make install \
 	&& make art ARGS="key:generate --ansi"
 
 composer: ## Run composer commands. Specify the command e.g. via make composer ARGS="install|update|require <dependency>"
