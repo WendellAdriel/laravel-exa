@@ -60,17 +60,19 @@ git clone git@github.com:WendellAdriel/laravel-exa.git my-app && cd my-app && rm
 
 ## Configuring the Application
 
+Run this command for the initial app configuration
+
+```bash
+make configure
+```
+
 Build the docker services with
 
 ```bash
 make build
 ```
 
-Run this command for the initial app configuration
-
-```bash
-make configure
-```
+Update the `.env` file and then run the migrations
 
 ### Database Config
 
