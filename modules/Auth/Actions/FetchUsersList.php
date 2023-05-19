@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Auth\Actions;
 
 use Exa\DTOs\DatatableDTO;

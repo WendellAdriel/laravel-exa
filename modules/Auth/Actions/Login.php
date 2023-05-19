@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Auth\Actions;
 
 use Illuminate\Auth\AuthenticationException;
@@ -25,7 +27,7 @@ final readonly class Login
 
         return [
             'type' => self::TOKEN_TYPE,
-            'token' => $user->createToken(Str::slug(config('app.name').'_login'))->plainTextToken,
+            'token' => $user->createToken(Str::slug(config('app.name') . '_login'))->plainTextToken,
         ];
     }
 

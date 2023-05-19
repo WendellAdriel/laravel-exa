@@ -1,4 +1,4 @@
-FROM redis
+FROM redis:alpine
 
 RUN mkdir -p /usr/local/etc/redis
 COPY docker/redis/config/redis.conf /usr/local/etc/redis/redis.conf

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exa\Commands;
 
 use Illuminate\Console\Command;
@@ -17,11 +19,11 @@ class MakeModuleCommand extends Command
     public function handle(): void
     {
         $moduleName = Str::studly($this->argument('module'));
-        $modulePath = base_path("modules/$moduleName");
+        $modulePath = base_path("modules/{$moduleName}");
         mkdir($modulePath, 0755, true);
 
         foreach ($this->moduleStructure() as $directory) {
-            $path = "$modulePath/$directory";
+            $path = "{$modulePath}/{$directory}";
             mkdir($path, 0755, true);
             $this->addGitKeepFile($path);
         }
@@ -42,18 +44,18 @@ class MakeModuleCommand extends Command
 
     private function addModuleRoutes(string $modulePath): void
     {
-        $path = "$modulePath/Routes";
+        $path = "{$modulePath}/Routes";
         mkdir($path, 0755, true);
 
         $commonRoutingPath = base_path('modules/Common/Routes');
         $routingFile = 'v1.php';
 
-        copy("$commonRoutingPath/$routingFile", "$path/$routingFile");
+        copy("{$commonRoutingPath}/{$routingFile}", "{$path}/{$routingFile}");
     }
 
     private function addGitKeepFile(string $path): void
     {
-        $gitKeep = fopen("$path/.gitkeep", 'w');
+        $gitKeep = fopen("{$path}/.gitkeep", 'w');
         fwrite($gitKeep, '');
         fclose($gitKeep);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exa\Services;
 
 use Exception;
@@ -65,9 +67,7 @@ readonly class SlackClient
             return '';
         }
 
-        $formatted = array_map(function ($user) {
-            return "<@{$user}>";
-        }, $users);
+        $formatted = array_map(fn ($user) => "<@{$user}>", $users);
 
         return implode(', ', $formatted);
     }

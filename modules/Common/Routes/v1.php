@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // Public Routes
 
 // Protected Routes

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exa\DTOs;
 
 use Carbon\CarbonImmutable;
@@ -27,8 +29,8 @@ class DateRangeDTO extends DatatableDTO
     protected function rules(): array
     {
         return array_merge(parent::rules(), [
-            'start_date' => ['sometimes', 'string', 'date_format:'.Formatter::API_DATE_FORMAT],
-            'end_date' => ['sometimes', 'string', 'date_format:'.Formatter::API_DATE_FORMAT],
+            'start_date' => ['sometimes', 'string', 'date_format:' . Formatter::API_DATE_FORMAT],
+            'end_date' => ['sometimes', 'string', 'date_format:' . Formatter::API_DATE_FORMAT],
         ]);
     }
 

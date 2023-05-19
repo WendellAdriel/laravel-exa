@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exa\Support\Formatter;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;

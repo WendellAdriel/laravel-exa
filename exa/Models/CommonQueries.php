@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exa\Models;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -77,7 +79,7 @@ trait CommonQueries
 
     public static function getModelTable(): string
     {
-        return (new static)->getTable();
+        return (new static())->getTable();
     }
 
     private static function getByParamsBase(array $params, string $defaultCompareType = '=', bool $withTrashed = false): Builder

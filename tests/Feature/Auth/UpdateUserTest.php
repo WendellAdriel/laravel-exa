@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Hash;
 use Modules\Auth\Models\User;
 use Modules\Auth\Support\Role;

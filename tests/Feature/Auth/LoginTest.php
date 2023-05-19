@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Modules\Auth\Support\Role;
 
 it('logins successfully', function () {

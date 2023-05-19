@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exa\Support;
 
 use Exa\DTOs\DatatableDTO;

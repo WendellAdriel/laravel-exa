@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,7 +19,7 @@ class DatabaseSeeder extends Seeder
         User::query()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-            'password' => 's3cr3T',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'role' => Role::ADMIN->value,
         ]);
     }
