@@ -7,12 +7,19 @@ help:
 start: ## Spin up the containers and run the app UI in watch mode
 	docker compose up -d
 
-stop: ## Shut down the containers
-	docker compose down \
+stop: ## Stop the containers
+	docker compose stop \
+	&& rm -f docker/redis/data/dump.rdb
+
+status: ## Status the containers
+	docker compose ps
+
+down: ## Shut down the containers with args for removed volumes
+	docker compose down $(ARGS) \
 	&& rm -f docker/redis/data/dump.rdb
 
 build: ## Build all docker images OR a specific image by providing the service name via: make build SERVICE_NAME=<service>
-	cp .env.example .env \
+	[ -f .env ] || cp .env.example .env \
 	&& docker compose build $(SERVICE_NAME)
 
 db-start: ## Spin up the DB container for migrations and seeding
