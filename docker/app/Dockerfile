@@ -49,7 +49,8 @@ RUN composer install --prefer-dist && rm -rf /root/.composer
 # Finish composer
 RUN composer dump-autoload
 
-RUN chmod -R 777 /var/www/storage/
+RUN chmod -R 775 /var/www/storage/
+RUN chmod -R 775 /var/www/bootstrap/cache/
 
 # Mark WORKDIR as safe for GIT
 RUN git config --global --add safe.directory /var/www
