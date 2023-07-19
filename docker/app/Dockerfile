@@ -15,11 +15,12 @@ RUN if [ ${M1_PROCESSOR} = true ]; then \
 ;fi
 
 # Install various packages, php extensions and composer
-RUN set -x && apk-install \
+RUN set -x && apk-install $PHPIZE_DEPS \
     libmcrypt-dev \
     mariadb-client \
     libpq-dev \
     htop \
+    linux-headers \
     && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 # XDebug
