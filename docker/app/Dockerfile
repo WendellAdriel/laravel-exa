@@ -5,6 +5,12 @@ FROM webdevops/php-nginx:8.2-alpine
 LABEL version="1.0"
 LABEL description="Laravel ExA"
 
+ARG M1_PROCESSOR
+ENV M1_PROCESSOR $M1_PROCESSOR
+
+ARG XDEBUG_ENABLED
+ENV XDEBUG_ENABLED $XDEBUG_ENABLED
+
 # Set the web root from which nginx serves our app
 ENV WEB_DOCUMENT_ROOT="/var/www/public"
 
