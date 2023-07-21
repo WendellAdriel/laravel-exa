@@ -5,6 +5,12 @@ FROM webdevops/php-nginx:8.2-alpine
 LABEL version="1.0"
 LABEL description="Laravel ExA"
 
+ARG M1_PROCESSOR
+ENV M1_PROCESSOR $M1_PROCESSOR
+
+ARG XDEBUG_ENABLED
+ENV XDEBUG_ENABLED $XDEBUG_ENABLED
+
 # Set the web root from which nginx serves our app
 ENV WEB_DOCUMENT_ROOT="/var/www/public"
 
@@ -15,11 +21,12 @@ RUN if [ ${M1_PROCESSOR} = true ]; then \
 ;fi
 
 # Install various packages, php extensions and composer
-RUN set -x && apk-install \
+RUN set -x && apk-install $PHPIZE_DEPS \
     libmcrypt-dev \
     mariadb-client \
     libpq-dev \
     htop \
+    linux-headers \
     && curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
 # XDebug
