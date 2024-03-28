@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    # NGINX + FPM + PHP 8.2
+    # NGINX + FPM + PHP 8.3
     app:
         image: wendelladriel/laravel-exa
         container_name: laravel-exa

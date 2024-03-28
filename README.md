@@ -8,7 +8,7 @@
 <p align="center">
 <a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/packagist/v/WendellAdriel/laravel-exa.svg?style=flat-square" alt="Packagist"></a>
 <a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/packagist/php-v/WendellAdriel/laravel-exa.svg?style=flat-square" alt="PHP from Packagist"></a>
-<a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/badge/Laravel-10.x-brightgreen.svg?style=flat-square" alt="Laravel Version"></a>
+<a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/badge/Laravel-11.x-brightgreen.svg?style=flat-square" alt="Laravel Version"></a>
 </p>
 
 <p align="center">
@@ -28,7 +28,6 @@
 * API Documentation with Swagger
 * Laravel Pint configuration (very opinionated)
 * Pest v2 for Tests
-* Git Hooks for linting files
 * Base classes to speed up the development
 * DTOs with [Laravel Validated DTO](https://github.com/WendellAdriel/laravel-validated-dto)
 * Slack Client for notifications
