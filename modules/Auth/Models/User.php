@@ -17,13 +17,13 @@ use Modules\Auth\Traits\HasRole;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,
+    use CommonQueries,
+        HasApiTokens,
         HasFactory,
-        Notifiable,
         HasRole,
         HasUuidField,
         LogChanges,
-        CommonQueries;
+        Notifiable;
 
     protected $fillable = [
         'uuid',
