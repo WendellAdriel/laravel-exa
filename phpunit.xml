@@ -22,6 +22,8 @@
   <source>
     <include>
       <directory suffix=".php">./app</directory>
+      <directory suffix=".php">./exa</directory>
+      <directory suffix=".php">./modules</directory>
     </include>
   </source>
 </phpunit>

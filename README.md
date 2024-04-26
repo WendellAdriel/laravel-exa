@@ -28,11 +28,12 @@
 * API Documentation with Swagger
 * Laravel Pint configuration (very opinionated)
 * Pest v2 for Tests
+* Type Coverage Tests
 * Base classes to speed up the development
 * DTOs with [Laravel Validated DTO](https://github.com/WendellAdriel/laravel-validated-dto)
 * Slack Client for notifications
 * API structured in modules
-* Laravel Sanctum for Authentication
+* JWT for Authentication
 * Users management out-of-the-box with simple roles system
 * Logs on DB for user logins and for actions made on models
 * [Strictus](https://github.com/php-strictus/strictus) for enforcing local variable types

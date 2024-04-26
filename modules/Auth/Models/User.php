@@ -11,14 +11,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Modules\Auth\Support\Role;
 use Modules\Auth\Traits\HasRole;
 
 class User extends Authenticatable
 {
     use CommonQueries,
-        HasApiTokens,
         HasFactory,
         HasRole,
         HasUuidField,
@@ -49,7 +47,7 @@ class User extends Authenticatable
         'role' => Role::REGULAR->value,
     ];
 
-    protected static function booted()
+    protected static function booted(): void
     {
         static::addGlobalScope('active-users', fn (Builder $builder) => $builder->where('active', true));
     }

@@ -15,7 +15,7 @@ readonly class NoContentResponse implements Responsable
     ) {
     }
 
-    public function toResponse($request): Response
+    public function toResponse($request): Response // @pest-ignore-type
     {
         return response()->noContent($this->code, $this->headers);
     }

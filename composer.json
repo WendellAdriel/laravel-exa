@@ -61,11 +61,15 @@
         "test": [
             "pest"
         ],
+        "test:types": [
+            "pest --type-coverage --min=100 app/ exa/ modules/"
+        ],
         "swagger": [
             "sh ./tools/swagger.sh"
         ],
         "prepare": [
             "pint --dirty",
+            "@test:types",
             "@swagger"
         ],
         "post-autoload-dump": [

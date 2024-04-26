@@ -19,7 +19,7 @@ readonly class ApiErrorResponse implements Responsable
     ) {
     }
 
-    public function toResponse($request): JsonResponse
+    public function toResponse($request): JsonResponse // @pest-ignore-type
     {
         $response = ['message' => $this->message];
 

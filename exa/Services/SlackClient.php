@@ -67,7 +67,7 @@ readonly class SlackClient
             return '';
         }
 
-        $formatted = array_map(fn ($user) => "<@{$user}>", $users);
+        $formatted = array_map(fn (string $user) => "<@{$user}>", $users);
 
         return implode(', ', $formatted);
     }

@@ -20,7 +20,7 @@ final readonly class HasRole
     /**
      * @throws AccessDeniedException
      */
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, string $role): Closure
     {
         $user = Auth::user();
         if (is_null($user)) {
