@@ -18,6 +18,15 @@ services:
             - "${APP_EXTERNAL_PORT_SSL}:443"
         networks:
             - laravel-exa
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
+        depends_on:
+            - redis
+            - mysql
 
     # REDIS
     redis:
@@ -32,6 +41,12 @@ services:
             - ./docker/redis/data:/data
         networks:
             - laravel-exa
+        healthcheck:
+            test: ["CMD", "redis-cli", "-h", "${REDIS_HOST:-localhost}", "-p", "${REDIS_PORT}:-6379", "-a", "${REDIS_PASSWORD:-null}", "ping"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
 
     # MYSQL
     mysql:
@@ -48,6 +63,12 @@ services:
             MYSQL_USER: ${DB_USERNAME}
         networks:
             - laravel-exa
+        healthcheck:
+            test: ["CMD-SHELL", "mysqladmin ping -h localhost -u${DB_USER:-exa} -p${DB_PASSWORD:-secret}"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 10s
 
     # MAILPIT
     mailpit:
