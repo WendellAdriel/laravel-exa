@@ -13,26 +13,26 @@ class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run(): void
     {
-        $user = User::where('email', 'admin@example.com')->first();
+        $user = User::query()->where('email', 'admin@example.com')->first();
 
-        if ($user) {
-            $user->update([
-                'name' => 'Admin',
-                'password' => Hash::make('password'),
-                'role' => Role::ADMIN->value,
-            ]);
-        } else {
-            User::create([
+        if (! $user) {
+            User::query()->create([
                 'email' => 'admin@example.com',
                 'name' => 'Admin',
                 'password' => Hash::make('password'),
                 'role' => Role::ADMIN->value,
             ]);
+
+            return;
         }
+
+        $user->update([
+            'name' => 'Admin',
+            'password' => Hash::make('password'),
+            'role' => Role::ADMIN->value,
+        ]);
     }
 }
