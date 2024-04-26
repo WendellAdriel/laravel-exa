@@ -8,6 +8,7 @@ use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 use Modules\Auth\Support\Role;
 use OpenApi\Attributes as OA;
+use WendellAdriel\ValidatedDTO\Casting\EnumCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 #[OA\Schema(
@@ -29,7 +30,7 @@ class CreateUserDTO extends ValidatedDTO
 
     public string $password;
 
-    public string $role;
+    public Role $role;
 
     protected function rules(): array
     {
@@ -53,12 +54,14 @@ class CreateUserDTO extends ValidatedDTO
     protected function defaults(): array
     {
         return [
-            'role' => Role::REGULAR->value,
+            'role' => Role::REGULAR,
         ];
     }
 
     protected function casts(): array
     {
-        return [];
+        return [
+            'role' => new EnumCast(Role::class),
+        ];
     }
 }

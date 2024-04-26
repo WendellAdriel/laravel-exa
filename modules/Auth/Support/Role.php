@@ -10,4 +10,9 @@ enum Role: string
     case REGULAR = 'regular';
     case MANAGER = 'manager';
     case ADMIN = 'admin';
+
+    public function label(): string
+    {
+        return ucfirst($this->value);
+    }
 }

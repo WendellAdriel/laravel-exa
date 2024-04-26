@@ -9,6 +9,7 @@ use Exa\Models\HasUuidField;
 use Exa\Models\LogChanges;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Auth\Support\Role;
@@ -21,12 +22,14 @@ class User extends Authenticatable
         HasRole,
         HasUuidField,
         LogChanges,
-        Notifiable;
+        Notifiable,
+        SoftDeletes;
 
     protected $fillable = [
         'uuid',
         'name',
         'email',
+        'email_verified_at',
         'password',
         'role',
         'active',
@@ -39,12 +42,13 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role' => Role::class,
         'active' => 'boolean',
     ];
 
     protected $attributes = [
         'active' => true,
-        'role' => Role::REGULAR->value,
+        'role' => Role::REGULAR,
     ];
 
     protected static function booted(): void

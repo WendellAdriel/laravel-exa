@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'name' => 'Admin',
                 'password' => Hash::make('password'),
-                'role' => Role::ADMIN->value,
+                'role' => Role::ADMIN,
             ]);
 
             return;
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         $user->update([
             'name' => 'Admin',
             'password' => Hash::make('password'),
-            'role' => Role::ADMIN->value,
+            'role' => Role::ADMIN,
         ]);
     }
 }
