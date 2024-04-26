@@ -21,7 +21,7 @@ use Modules\Auth\DTOs\UpdateUserDTO;
 use Modules\Auth\Resources\UserResource;
 use OpenApi\Attributes as OA;
 
-class UserController extends Controller
+final class UserController extends Controller
 {
     #[OA\Get(
         path: '/v1/users',

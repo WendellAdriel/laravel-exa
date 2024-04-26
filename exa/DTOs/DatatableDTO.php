@@ -7,6 +7,7 @@ namespace Exa\DTOs;
 use Exa\Support\SortOption;
 use Illuminate\Validation\Rules\Enum;
 use OpenApi\Attributes as OA;
+use WendellAdriel\ValidatedDTO\Casting\EnumCast;
 use WendellAdriel\ValidatedDTO\Casting\IntegerCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
@@ -53,7 +54,7 @@ class DatatableDTO extends ValidatedDTO
 
     public ?string $sort_field;
 
-    public ?string $sort_order;
+    public ?SortOption $sort_order;
 
     public ?string $search;
 
@@ -88,6 +89,7 @@ class DatatableDTO extends ValidatedDTO
     {
         return [
             'page' => new IntegerCast(),
+            'sort_order' => new EnumCast(SortOption::class),
         ];
     }
 }

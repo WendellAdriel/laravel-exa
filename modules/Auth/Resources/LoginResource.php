@@ -15,7 +15,7 @@ use OpenApi\Attributes as OA;
         new OA\Property(property: 'token', type: 'string'),
     ],
 )]
-class LoginResource extends JsonResource
+final class LoginResource extends JsonResource
 {
     public function toArray(Request $request): array
     {

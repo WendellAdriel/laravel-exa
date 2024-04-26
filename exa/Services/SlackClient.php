@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 
-readonly class SlackClient
+final readonly class SlackClient
 {
     public function __construct(
         private string $botName,

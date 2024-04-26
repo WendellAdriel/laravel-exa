@@ -7,7 +7,7 @@ namespace Exa\Http\Responses;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Response;
 
-readonly class NoContentResponse implements Responsable
+final readonly class NoContentResponse implements Responsable
 {
     public function __construct(
         private int $code = Response::HTTP_NO_CONTENT,

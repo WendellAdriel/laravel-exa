@@ -15,7 +15,7 @@ use Illuminate\Notifications\Notifiable;
 use Modules\Auth\Support\Role;
 use Modules\Auth\Traits\HasRole;
 
-class User extends Authenticatable
+final class User extends Authenticatable
 {
     use CommonQueries,
         HasFactory,
@@ -53,6 +53,9 @@ class User extends Authenticatable
 
     protected static function booted(): void
     {
-        static::addGlobalScope('active-users', fn (Builder $builder) => $builder->where('active', true));
+        self::addGlobalScope(
+            'active-users',
+            fn (Builder $builder) => $builder->where('active', true)
+        );
     }
 }

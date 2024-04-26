@@ -22,7 +22,7 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
         new OA\Property(property: 'role', type: 'string', default: 'regular', enum: ['viewer', 'regular', 'manager', 'admin']),
     ],
 )]
-class CreateUserDTO extends ValidatedDTO
+final class CreateUserDTO extends ValidatedDTO
 {
     public string $name;
 

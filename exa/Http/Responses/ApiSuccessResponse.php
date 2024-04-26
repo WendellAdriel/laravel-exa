@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
-readonly class ApiSuccessResponse implements Responsable
+final readonly class ApiSuccessResponse implements Responsable
 {
     public function __construct(
         private JsonResource $resource,

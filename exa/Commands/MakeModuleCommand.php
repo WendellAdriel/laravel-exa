@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'make:module')]
-class MakeModuleCommand extends Command
+final class MakeModuleCommand extends Command
 {
     protected $signature = 'make:module
                             {module : The module name}';
@@ -37,8 +37,19 @@ class MakeModuleCommand extends Command
     private function moduleStructure(): array
     {
         return [
-            'Actions', 'Commands', 'Controllers', 'DTOs', 'Events', 'Exceptions', 'Listeners',
-            'Models', 'Requests', 'Resources', 'Responses', 'Support', 'Traits',
+            'Actions',
+            'Commands',
+            'Controllers',
+            'DTOs',
+            'Events',
+            'Exceptions',
+            'Listeners',
+            'Models',
+            'Requests',
+            'Resources',
+            'Responses',
+            'Support',
+            'Traits',
         ];
     }
 

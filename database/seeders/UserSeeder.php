@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Auth\Models\User;
 use Modules\Auth\Support\Role;
 
-class UserSeeder extends Seeder
+final class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.

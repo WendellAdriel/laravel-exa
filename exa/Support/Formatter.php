@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exa\Support;
 
-readonly class Formatter
+final readonly class Formatter
 {
     public const ON_LABEL = 'ON';
 

@@ -6,7 +6,7 @@ namespace Exa\Exceptions;
 
 use Illuminate\Http\Response;
 
-class AccessDeniedException extends ExaException
+final class AccessDeniedException extends ExaException
 {
     public function __construct()
     {

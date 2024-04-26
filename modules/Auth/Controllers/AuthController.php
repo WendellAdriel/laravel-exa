@@ -15,7 +15,7 @@ use Modules\Auth\Resources\LoginResource;
 use Modules\Auth\Resources\UserResource;
 use OpenApi\Attributes as OA;
 
-class AuthController extends Controller
+final class AuthController extends Controller
 {
     #[OA\Post(
         path: '/v1/auth/login',

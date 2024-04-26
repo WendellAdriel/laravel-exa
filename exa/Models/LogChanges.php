@@ -54,7 +54,7 @@ trait LogChanges
             'user_id' => Auth::check() ? Auth::user()->id : null,
             'record_id' => empty($model->id) ? 0 : $model->id,
             'table' => $model->getTable(),
-            'action' => $action->value,
+            'action' => $action,
             'payload' => $model->toJson(),
             'old_data' => $action !== ChangeAction::CREATE ? json_encode($model->getOriginal()) : null,
             'new_data' => $action !== ChangeAction::DELETE ? json_encode($model->getAttributes()) : null,
