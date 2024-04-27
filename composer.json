@@ -63,7 +63,7 @@
             "pest"
         ],
         "test:types": [
-            "pest --type-coverage --min=100 app/ exa/ modules/"
+            "pest --type-coverage --min=100"
         ],
         "swagger": [
             "sh ./tools/swagger.sh"
