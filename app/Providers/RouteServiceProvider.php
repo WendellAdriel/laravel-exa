@@ -68,7 +68,7 @@ final class RouteServiceProvider extends ServiceProvider
                 'datetime' => Carbon::now()->format(Formatter::API_DATETIME_FORMAT),
             ];
 
-            if (! App::environment('local')) {
+            if (! App::environment('local', 'testing')) {
                 return response()->json($data);
             }
 

@@ -12,7 +12,7 @@ it('gets user info', function () {
             'uuid' => $newUser->uuid,
             'name' => $newUser->name,
             'email' => $newUser->email,
-            'role' => $newUser->role,
+            'role' => $newUser->role->value,
             'active' => $newUser->active,
             'created_at' => $newUser->created_at->toISOString(),
             'updated_at' => $newUser->updated_at->toISOString(),

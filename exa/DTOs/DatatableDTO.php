@@ -80,7 +80,7 @@ class DatatableDTO extends ValidatedDTO
             'page' => 1,
             'per_page' => 20,
             'sort_field' => null,
-            'sort_order' => null,
+            'sort_order' => SortOption::ASC,
             'search' => null,
         ];
     }

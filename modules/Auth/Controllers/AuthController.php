@@ -58,7 +58,7 @@ final class AuthController extends Controller
     #[OA\Response(response: '500', description: 'Server Error')]
     public function logout(): NoContentResponse
     {
-        Auth::guard('web')->logout();
+        auth()->logout(true);
 
         return new NoContentResponse();
     }

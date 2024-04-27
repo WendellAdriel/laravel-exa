@@ -14,8 +14,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Auth\Support\Role;
 use Modules\Auth\Traits\HasRole;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-final class User extends Authenticatable
+final class User extends Authenticatable implements JWTSubject
 {
     use CommonQueries,
         HasFactory,
@@ -50,6 +51,16 @@ final class User extends Authenticatable
         'active' => true,
         'role' => Role::REGULAR,
     ];
+
+    public function getJWTIdentifier(): mixed
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
 
     protected static function booted(): void
     {

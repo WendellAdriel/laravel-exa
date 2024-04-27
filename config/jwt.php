@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of jwt-auth.
  *
@@ -294,7 +296,7 @@ return [
         |
         */
 
-        'storage' => Tymon\JWTAuth\Providers\Storage\Illuminate::class,
+        'storage' => \Exa\Support\JWTStorage::class,
 
     ],
 

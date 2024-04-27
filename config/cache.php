@@ -94,6 +94,11 @@ return [
             'driver' => 'octane',
         ],
 
+        'jwt' => [
+            'driver' => 'redis',
+            'connection' => 'jwt',
+            'lock_connection' => 'default',
+        ],
     ],
 
     /*
