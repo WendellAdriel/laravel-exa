@@ -15,7 +15,7 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
         new OA\Property(property: 'password', type: 'string'),
     ],
 )]
-class LoginDTO extends ValidatedDTO
+final class LoginDTO extends ValidatedDTO
 {
     public string $email;
 

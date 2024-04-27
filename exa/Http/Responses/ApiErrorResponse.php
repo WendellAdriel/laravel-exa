@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Throwable;
 
-readonly class ApiErrorResponse implements Responsable
+final readonly class ApiErrorResponse implements Responsable
 {
     public function __construct(
         private string $message,
@@ -19,7 +19,7 @@ readonly class ApiErrorResponse implements Responsable
     ) {
     }
 
-    public function toResponse($request): JsonResponse
+    public function toResponse($request): JsonResponse // @pest-ignore-type
     {
         $response = ['message' => $this->message];
 

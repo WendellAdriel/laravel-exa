@@ -13,7 +13,7 @@ it('gets the logged user', function () {
             'uuid' => $user->uuid,
             'name' => $user->name,
             'email' => $user->email,
-            'role' => $user->role,
+            'role' => $user->role->value,
             'active' => $user->active,
             'created_at' => $user->created_at->toISOString(),
             'updated_at' => $user->updated_at->toISOString(),

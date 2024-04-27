@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
-readonly class ApiSuccessResponse implements Responsable
+final readonly class ApiSuccessResponse implements Responsable
 {
     public function __construct(
         private JsonResource $resource,
@@ -18,7 +18,7 @@ readonly class ApiSuccessResponse implements Responsable
     ) {
     }
 
-    public function toResponse($request): JsonResponse
+    public function toResponse($request): JsonResponse // @pest-ignore-type
     {
         return response()->json(
             $this->resource->toArray($request),

@@ -20,7 +20,7 @@ final readonly class UpdateUser
     {
         $authUser = Auth::user();
         $user = $this->fetchUser->handle($uuid);
-        $updateData = collect($dto->toArray())->filter(fn ($item) => ! is_null($item))->toArray();
+        $updateData = collect($dto->toArray())->filter(fn (string|bool|null $item) => ! is_null($item))->toArray();
 
         if (! $authUser->is_admin) {
             unset($updateData['role'], $updateData['active']);

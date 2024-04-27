@@ -23,7 +23,7 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
         new OA\Property(property: 'active', type: 'boolean'),
     ],
 )]
-class UpdateUserDTO extends ValidatedDTO
+final class UpdateUserDTO extends ValidatedDTO
 {
     public ?string $name;
 

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-readonly class Datatable
+final readonly class Datatable
 {
     public const ALL_COLUMNS = ['*'];
 
@@ -32,7 +32,7 @@ readonly class Datatable
             return $builder;
         }
 
-        return $dto->sort_order === SortOption::ASC->value
+        return $dto->sort_order === SortOption::ASC
             ? $builder->orderBy($dto->sort_field)
             : $builder->orderByDesc($dto->sort_field);
     }

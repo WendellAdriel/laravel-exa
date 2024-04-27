@@ -9,26 +9,28 @@ use Exa\Models\HasUuidField;
 use Exa\Models\LogChanges;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Modules\Auth\Support\Role;
 use Modules\Auth\Traits\HasRole;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+final class User extends Authenticatable implements JWTSubject
 {
     use CommonQueries,
-        HasApiTokens,
         HasFactory,
         HasRole,
         HasUuidField,
         LogChanges,
-        Notifiable;
+        Notifiable,
+        SoftDeletes;
 
     protected $fillable = [
         'uuid',
         'name',
         'email',
+        'email_verified_at',
         'password',
         'role',
         'active',
@@ -41,16 +43,30 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role' => Role::class,
         'active' => 'boolean',
     ];
 
     protected $attributes = [
         'active' => true,
-        'role' => Role::REGULAR->value,
+        'role' => Role::REGULAR,
     ];
 
-    protected static function booted()
+    public function getJWTIdentifier(): mixed
     {
-        static::addGlobalScope('active-users', fn (Builder $builder) => $builder->where('active', true));
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims(): array
+    {
+        return [];
+    }
+
+    protected static function booted(): void
+    {
+        self::addGlobalScope(
+            'active-users',
+            fn (Builder $builder) => $builder->where('active', true)
+        );
     }
 }

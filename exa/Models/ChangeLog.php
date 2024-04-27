@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Exa\Models;
 
+use Exa\Support\ChangeAction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Auth\Models\User;
 
-class ChangeLog extends Model
+final class ChangeLog extends Model
 {
     use CommonQueries;
 
@@ -24,6 +25,7 @@ class ChangeLog extends Model
     ];
 
     protected $casts = [
+        'action' => ChangeAction::class,
         'payload' => 'array',
         'old_data' => 'array',
         'new_data' => 'array',

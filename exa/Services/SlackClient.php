@@ -8,7 +8,7 @@ use Exception;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 
-readonly class SlackClient
+final readonly class SlackClient
 {
     public function __construct(
         private string $botName,
@@ -67,7 +67,7 @@ readonly class SlackClient
             return '';
         }
 
-        $formatted = array_map(fn ($user) => "<@{$user}>", $users);
+        $formatted = array_map(fn (string $user) => "<@{$user}>", $users);
 
         return implode(', ', $formatted);
     }

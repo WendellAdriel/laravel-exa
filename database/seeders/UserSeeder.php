@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Auth\Models\User;
 use Modules\Auth\Support\Role;
 
-class UserSeeder extends Seeder
+final class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'name' => 'Admin',
                 'password' => Hash::make('password'),
-                'role' => Role::ADMIN->value,
+                'role' => Role::ADMIN,
             ]);
 
             return;
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
         $user->update([
             'name' => 'Admin',
             'password' => Hash::make('password'),
-            'role' => Role::ADMIN->value,
+            'role' => Role::ADMIN,
         ]);
     }
 }

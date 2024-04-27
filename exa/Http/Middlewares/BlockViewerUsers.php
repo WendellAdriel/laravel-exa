@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 final class BlockViewerUsers
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         $user = Auth::user();
         if (is_null($user)) {

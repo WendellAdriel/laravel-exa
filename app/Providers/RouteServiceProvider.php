@@ -24,7 +24,7 @@ use OpenApi\Attributes as OA;
     scheme: 'bearer',
     bearerFormat: 'JWT'
 )]
-class RouteServiceProvider extends ServiceProvider
+final class RouteServiceProvider extends ServiceProvider
 {
     /**
      * The path to the "home" route for your application.
@@ -52,20 +52,34 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function configureRateLimiting(): void
     {
-        RateLimiter::for('api', fn (Request $request) => Limit::perMinute(60)->by($request->user()?->id ?: $request->ip()));
+        RateLimiter::for(
+            'api',
+            fn (Request $request) => Limit::perMinute(60)
+                ->by($request->user()?->id ?: $request->ip())
+        );
     }
 
     private function configureIndexRoute(): void
     {
         Route::get(self::HOME, function () {
-            return response()->json([
+            $data = [
                 'application' => config('app.name'),
+                'status' => Response::HTTP_OK,
+                'datetime' => Carbon::now()->format(Formatter::API_DATETIME_FORMAT),
+            ];
+
+            if (! App::environment('local', 'testing')) {
+                return response()->json($data);
+            }
+
+            $data = [
+                ...$data,
                 'environment' => config('app.env'),
                 'php_version' => phpversion(),
                 'laravel_version' => App::version(),
-                'status' => Response::HTTP_OK,
-                'datetime' => Carbon::now()->format(Formatter::API_DATETIME_FORMAT),
-            ]);
+            ];
+
+            return response()->json($data);
         })->name('login');
     }
 

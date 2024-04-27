@@ -20,7 +20,7 @@ use OpenApi\Attributes as OA;
         new OA\Property(property: 'updated_at', type: 'string', format: 'date-time'),
     ],
 )]
-class UserResource extends JsonResource
+final class UserResource extends JsonResource
 {
     public function toArray(Request $request): array
     {

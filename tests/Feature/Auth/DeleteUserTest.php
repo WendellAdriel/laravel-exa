@@ -11,7 +11,7 @@ it('deletes user', function () {
     expect($this->actingAs(testUser(Role::ADMIN))->delete("v1/users/{$newUser->uuid}"))
         ->assertNoContent();
 
-    $this->assertDatabaseMissing(User::getModelTable(), [
+    $this->assertSoftDeleted(User::getModelTable(), [
         'email' => $newUser->email,
     ]);
 });

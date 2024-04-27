@@ -11,7 +11,7 @@ use Modules\Auth\Support\Role;
 Route::post('auth/login', [AuthController::class, 'login']);
 
 // Protected Routes
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('me', [AuthController::class, 'user']);

@@ -6,7 +6,7 @@ namespace Modules\Auth\Models;
 
 use Exa\Models\BaseModel;
 
-class UserLogin extends BaseModel
+final class UserLogin extends BaseModel
 {
     public bool $disableChangeLogs = true;
 

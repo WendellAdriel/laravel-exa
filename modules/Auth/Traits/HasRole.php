@@ -39,6 +39,6 @@ trait HasRole
 
     public function hasRole(Role $role): bool
     {
-        return $this->role === $role->value;
+        return $this->role === $role;
     }
 }

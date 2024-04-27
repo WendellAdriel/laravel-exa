@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Throwable;
 
-class Handler extends ExceptionHandler
+final class Handler extends ExceptionHandler
 {
     /**
      * A list of exception types with their corresponding custom log levels.
@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $exception) // @pest-ignore-type
     {
         if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
             return $this->error($exception, Response::HTTP_UNAUTHORIZED, 'Unauthenticated');
@@ -81,7 +81,7 @@ class Handler extends ExceptionHandler
         return $this->error($exception, Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
-    protected function unauthenticated($request, \Illuminate\Auth\AuthenticationException $exception)
+    protected function unauthenticated($request, \Illuminate\Auth\AuthenticationException $exception) // @pest-ignore-type
     {
         return $this->error($exception, Response::HTTP_UNAUTHORIZED, 'Unauthenticated');
     }

@@ -6,7 +6,6 @@ namespace Modules\Auth\Actions;
 
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Modules\Auth\DTOs\LoginDTO;
 use Modules\Auth\Models\User;
 use Modules\Auth\Models\UserLogin;
@@ -17,7 +16,8 @@ final readonly class Login
 
     public function handle(LoginDTO $dto): array
     {
-        if (! Auth::attempt($dto->toArray())) {
+        $token = Auth::attempt($dto->toArray());
+        if (! $token) {
             throw new AuthenticationException();
         }
 
@@ -27,7 +27,7 @@ final readonly class Login
 
         return [
             'type' => self::TOKEN_TYPE,
-            'token' => $user->createToken(Str::slug(config('app.name') . '_login'))->plainTextToken,
+            'token' => $token,
         ];
     }
 
