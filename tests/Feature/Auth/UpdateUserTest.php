@@ -14,13 +14,15 @@ it('checks that admin user can update user email, role and active status', funct
         'active' => false,
     ];
 
-    expect($this->actingAs(testUser(Role::ADMIN))->put("v1/users/{$newUser->uuid}", $params))
+    $adminUser = testUser(Role::ADMIN);
+    expect($this->actingAs($adminUser)->put("v1/users/{$newUser->uuid}", $params))
         ->assertOk();
 
     $this->assertDatabaseHas(User::getModelTable(), [
         'email' => 'test@test.com',
         'role' => Role::VIEWER->value,
         'active' => false,
+        'updated_by' => $adminUser->id,
     ]);
 });
 
@@ -53,6 +55,7 @@ it('checks that user can update its own email', function () {
 
     $this->assertDatabaseHas(User::getModelTable(), [
         'email' => 'test@test.com',
+        'updated_by' => $user->id,
     ]);
 });
 

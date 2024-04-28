@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use Exa\Services\SlackClient;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
+use Modules\Auth\Models\User;
 
 final class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,12 @@ final class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         JsonResource::withoutWrapping();
+
+        Blueprint::macro('userActions', function () {
+            $this->foreignId('created_by')->nullable()->constrained(table: User::getModelTable());
+            $this->foreignId('updated_by')->nullable()->constrained(table: User::getModelTable());
+            $this->foreignId('deleted_by')->nullable()->constrained(table: User::getModelTable());
+        });
     }
 
     private function registerSlackClient(): void
