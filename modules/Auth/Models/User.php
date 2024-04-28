@@ -7,6 +7,7 @@ namespace Modules\Auth\Models;
 use Exa\Models\CommonQueries;
 use Exa\Models\HasUuidField;
 use Exa\Models\LogChanges;
+use Exa\Models\UserActions;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,7 +25,8 @@ final class User extends Authenticatable implements JWTSubject
         HasUuidField,
         LogChanges,
         Notifiable,
-        SoftDeletes;
+        SoftDeletes,
+        UserActions;
 
     protected $fillable = [
         'uuid',

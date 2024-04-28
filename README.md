@@ -38,6 +38,7 @@
 * Logs on DB for user logins and for actions made on models
 * [Strictus](https://github.com/php-strictus/strictus) for enforcing local variable types
 * Models extending from BaseModel use soft deletes by default
+* Log actions made by users with the `created_by`, `updated_by` and `deleted_by` fields. Use the `$table->userActions()` in your migrations to add these fields.
 
 ## Using the Template
 
@@ -223,11 +224,12 @@ Inside the `exa` folder, there are a lot of classes provided by this **skeleton*
 
 ### Models
 
-* `BaseModel` - Base class that all your models should extend, already configured with the `CommonQueries` and `LogChanges` Traits.
+* `BaseModel` - Base class that all your models should extend, already configured with the `CommonQueries`, `LogChanges`, `SoftDeletes` and `UserActions` Traits.
 * `ChangeLog` - Model for the table that logs all changes made on other models.
 * `CommonQueries` - This Trait provides a lot of methods for common queries that you can use with your models.
 * `HasUuidField` - This Trait provides UUID field support for models that don't want the UUID to be the primary key.
 * `LogChanges` - This Trait provides listeners for logging changes on the models. Check the class to know how you can customize your models with the properties of this Trait.
+* `UserActions` - This Trait provides listeners for logging changes made by users on the models populating the `created_by`, `updated_by` and `deleted_by` fields. Check the class to know how you can customize your models with the properties of this Trait.
 
 ### Services
 

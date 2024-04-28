@@ -11,5 +11,6 @@ abstract class BaseModel extends Model
 {
     use CommonQueries,
         LogChanges,
-        SoftDeletes;
+        SoftDeletes,
+        UserActions;
 }

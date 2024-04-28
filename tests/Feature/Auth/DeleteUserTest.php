@@ -7,12 +7,14 @@ use Modules\Auth\Support\Role;
 
 it('deletes user', function () {
     $newUser = testUser(Role::REGULAR);
+    $adminUser = testUser(Role::ADMIN);
 
-    expect($this->actingAs(testUser(Role::ADMIN))->delete("v1/users/{$newUser->uuid}"))
+    expect($this->actingAs($adminUser)->delete("v1/users/{$newUser->uuid}"))
         ->assertNoContent();
 
     $this->assertSoftDeleted(User::getModelTable(), [
         'email' => $newUser->email,
+        'deleted_by' => $adminUser->id,
     ]);
 });
 

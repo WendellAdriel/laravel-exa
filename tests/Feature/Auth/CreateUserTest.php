@@ -6,11 +6,13 @@ use Modules\Auth\Models\User;
 use Modules\Auth\Support\Role;
 
 it('creates a new user', function () {
-    expect($this->actingAs(testUser(Role::ADMIN))->post('v1/users', dumbUserData()))
+    $user = testUser(Role::ADMIN);
+    expect($this->actingAs($user)->post('v1/users', dumbUserData()))
         ->assertCreated();
 
     $this->assertDatabaseHas(User::getModelTable(), [
         'email' => 'john.doe@example.com',
+        'created_by' => $user->id,
     ]);
 });
 

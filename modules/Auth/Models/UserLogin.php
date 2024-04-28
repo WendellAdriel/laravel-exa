@@ -10,6 +10,8 @@ final class UserLogin extends BaseModel
 {
     public bool $disableChangeLogs = true;
 
+    public bool $disableUserActions = true;
+
     protected $fillable = [
         'user_id',
         'ip',
