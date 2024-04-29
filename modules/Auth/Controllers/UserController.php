@@ -9,7 +9,6 @@ use Exa\DTOs\DatatableDTO;
 use Exa\Http\Responses\ApiSuccessResponse;
 use Exa\Http\Responses\NoContentResponse;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Auth\Actions\CreateUser;
 use Modules\Auth\Actions\DeleteUser;
@@ -48,9 +47,9 @@ final class UserController extends Controller
     #[OA\Response(response: '401', description: 'Unauthorized')]
     #[OA\Response(response: '403', description: 'Forbidden')]
     #[OA\Response(response: '500', description: 'Server Error')]
-    public function index(Request $request, FetchUsersList $action): JsonResponse
+    public function index(DatatableDTO $dto, FetchUsersList $action): JsonResponse
     {
-        return UserResource::collection($action->handle(DatatableDTO::fromRequest($request)))->response();
+        return UserResource::collection($action->handle($dto))->response();
     }
 
     #[OA\Get(
@@ -98,10 +97,10 @@ final class UserController extends Controller
     #[OA\Response(response: '403', description: 'Forbidden')]
     #[OA\Response(response: '422', description: 'Invalid Data')]
     #[OA\Response(response: '500', description: 'Server Error')]
-    public function store(Request $request, CreateUser $action): ApiSuccessResponse
+    public function store(CreateUserDTO $dto, CreateUser $action): ApiSuccessResponse
     {
         return new ApiSuccessResponse(
-            new UserResource($action->handle(CreateUserDTO::fromRequest($request))),
+            new UserResource($action->handle($dto)),
             Response::HTTP_CREATED
         );
     }
@@ -131,11 +130,9 @@ final class UserController extends Controller
     #[OA\Response(response: '404', description: 'Not Found')]
     #[OA\Response(response: '422', description: 'Invalid Data')]
     #[OA\Response(response: '500', description: 'Server Error')]
-    public function update(Request $request, string $uuid, UpdateUser $action): ApiSuccessResponse
+    public function update(UpdateUserDTO $dto, string $uuid, UpdateUser $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse(
-            new UserResource($action->handle($uuid, UpdateUserDTO::fromRequest($request)))
-        );
+        return new ApiSuccessResponse(new UserResource($action->handle($uuid, $dto)));
     }
 
     #[OA\Delete(

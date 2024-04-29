@@ -7,7 +7,6 @@ namespace Modules\Auth\Controllers;
 use App\Http\Controllers\Controller;
 use Exa\Http\Responses\ApiSuccessResponse;
 use Exa\Http\Responses\NoContentResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Auth\Actions\Login;
 use Modules\Auth\DTOs\LoginDTO;
@@ -38,11 +37,9 @@ final class AuthController extends Controller
     #[OA\Response(response: '403', description: 'Forbidden')]
     #[OA\Response(response: '422', description: 'Invalid Data')]
     #[OA\Response(response: '500', description: 'Server Error')]
-    public function login(Request $request, Login $action): ApiSuccessResponse
+    public function login(LoginDTO $dto, Login $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse(
-            new LoginResource($action->handle(LoginDTO::fromRequest($request)))
-        );
+        return new ApiSuccessResponse(new LoginResource($action->handle($dto)));
     }
 
     #[OA\Post(
