@@ -47,12 +47,13 @@ final readonly class Datatable
             foreach ($fieldsToSearch as $field) {
                 if (str_contains($field, '.')) {
                     [$relation, $column] = explode('.', $field);
-                    $query->orWhereHas($relation, function ($q) use ($dto, $column) {
+                    $query->orWhereHas($relation, function (Builder $q) use ($dto, $column) {
                         $q->where($column, 'LIKE', "%{$dto->search}%");
                     });
-                } else {
-                    $query->orWhere($field, 'LIKE', "%{$dto->search}%");
+
+                    continue;
                 }
+                $query->orWhere($field, 'LIKE', "%{$dto->search}%");
             }
         });
     }
