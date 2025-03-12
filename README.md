@@ -8,7 +8,7 @@
 <p align="center">
 <a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/packagist/v/WendellAdriel/laravel-exa.svg?style=flat-square" alt="Packagist"></a>
 <a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/packagist/php-v/WendellAdriel/laravel-exa.svg?style=flat-square" alt="PHP from Packagist"></a>
-<a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/badge/Laravel-11.x-brightgreen.svg?style=flat-square" alt="Laravel Version"></a>
+<a href="https://packagist.org/packages/WendellAdriel/laravel-exa"><img src="https://img.shields.io/badge/Laravel-12.x-brightgreen.svg?style=flat-square" alt="Laravel Version"></a>
 </p>
 
 <p align="center">
@@ -24,11 +24,9 @@
 ## Features
 
 * Your API running on the latest version of Laravel and PHP
-* Docker config with PHP, Nginx, MySQL, Redis and Mailpit
 * API Documentation with Swagger
 * Laravel Pint configuration (very opinionated)
-* Pest v2 for Tests
-* Type Coverage Tests with 100% type coverage
+* Pest v3 for Tests
 * Base classes to speed up the development
 * DTOs with [Laravel Validated DTO](https://github.com/WendellAdriel/laravel-validated-dto)
 * Slack Client for notifications
@@ -36,122 +34,44 @@
 * JWT for Authentication
 * Users management out-of-the-box with simple roles system
 * Logs on DB for user logins and for actions made on models
-* [Strictus](https://github.com/php-strictus/strictus) for enforcing local variable types
-* Models extending from BaseModel use soft deletes by default
 * Log actions made by users with the `created_by`, `updated_by` and `deleted_by` fields. Use the `$table->userActions()` in your migrations to add these fields.
 
 ## Using the Template
-
-There are three ways of using this template:
-
-### Composer (Recommended)
 
 ```bash
 composer create-project --prefer-dist wendelladriel/laravel-exa my-app
 ```
 
-### GitHub Template
-
-Click the `Use this template` button in the GitHub repository page.
-
-### Git Clone
-
-```bash
-git clone git@github.com:WendellAdriel/laravel-exa.git my-app && cd my-app && rm -rf .git
-```
-
 ## Configuring the Application
 
-Build the docker services with
+Copy the `.env.example` to `.env` and update the needed values
 
 ```bash
-make build
+cp .env.example .env
 ```
 
-Run this command for the initial app configuration
+Install the dependencies
 
 ```bash
-make configure
+composer install
 ```
 
-### Database Config
-
-Start the DB container with
+Generate the application key and JWT secret
 
 ```bash
-make db-start
+php artisan key:generate --ansi && php artisan jwt:secret
 ```
 
 Run the migrations
 
 ```bash
-make art ARGS="migrate"
+php artisan migrate
 ```
 
 Update the admin user in the `database/seeders/DatabaseSeeder.php` file and run the seeds
 
 ```bash
-make art ARGS="db:seed"
-```
-
-Stop the DB container with
-
-```bash
-make db-stop
-```
-
-### M1/2 Processor Config
-
-If you're using a **Mac** with **M1/2 processor**, you need to update the `M1_PROCESSOR` env variable to `true`
-
-### XDebug Config
-
-By default, **XDebug** will be installed, if you want to disable it, update the `XDEBUG_ENABLED` env variable to `false`
-
-You can also configure **XDebug** by updating the `docker/app/config/xdebug.ini` file
-
-### Updating Services Ports
-
-You can update which ports the services will connect to your machine by updating these variables in the `.env` file
-
-* `APP_EXTERNAL_PORT`
-* `APP_EXTERNAL_PORT_SSL`
-* `SWAGGER_EXTERNAL_PORT`
-* `DB_EXTERNAL_PORT`
-* `REDIS_EXTERNAL_PORT`
-* `MAILPIT_EXTERNAL_PORT_SMTP`
-* `MAILPIT_EXTERNAL_PORT_HTTP`
-
-## Running the Application
-
-Run this command to start the application
-
-```bash
-make start
-```
-
-After completion, you can access the application at
-
-```bash
-http://localhost:APP_EXTERNAL_PORT
-```
-
-By default, the `APP_EXTERNAL_PORT` is `8000`
-
-```bash
-http://localhost:8000
-```
-
-You can check the Swagger docs at
-
-```bash
-http://localhost:SWAGGER_EXTERNAL_PORT
-```
-
-By default, the `SWAGGER_EXTERNAL_PORT` is `8080`
-
-```bash
-http://localhost:8080
+php artisan db:seed
 ```
 
 ## Application Structure
@@ -169,7 +89,7 @@ your application.
 To create new modules you can use this command
 
 ```bash
-make art ARGS="make:module NAME"
+php artisan make:module MODULE_NAME
 ```
 
 This will create a new module inside the `modules` folder with the same structure of the other modules. It will create
@@ -177,22 +97,28 @@ the module disabled by default. To enable it, add the new module name to the `co
 
 ### Commands Available
 
-For running Pint in the whole codebase use
+Run the linter (Pint) in the whole codebase
 
 ```bash
-make lint
+composer lint
 ```
 
-For running the test suite use
+Run the test suite
 
 ```bash
-make test
+composer test
 ```
 
-Use this command to see all the commands available
+Update the Swagger docs
 
 ```bash
-make
+composer swagger
+```
+
+Run the linter (Pint) in staged files and update the Swagger docs
+
+```bash
+composer prepare
 ```
 
 ## ExA Classes
@@ -224,7 +150,7 @@ Inside the `exa` folder, there are a lot of classes provided by this **skeleton*
 
 ### Models
 
-* `BaseModel` - Base class that all your models should extend, already configured with the `CommonQueries`, `LogChanges`, `SoftDeletes` and `UserActions` Traits.
+* `BaseModel` - Base class that all your models should extend, already configured with the `CommonQueries`, `LogChanges` and `UserActions` Traits.
 * `ChangeLog` - Model for the table that logs all changes made on other models.
 * `CommonQueries` - This Trait provides a lot of methods for common queries that you can use with your models.
 * `HasUuidField` - This Trait provides UUID field support for models that don't want the UUID to be the primary key.
