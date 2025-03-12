@@ -21,25 +21,24 @@
         }
     ],
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "ext-curl": "*",
         "guzzlehttp/guzzle": "^7.8",
-        "laravel/framework": "^11.5",
-        "laravel/tinker": "^2.9",
-        "strictus/strictus": "^1.3",
+        "laravel/framework": "^12.1",
+        "laravel/tinker": "^2.10",
         "tymon/jwt-auth": "^2.1",
-        "wendelladriel/laravel-validated-dto": "^3.5",
+        "wendelladriel/laravel-validated-dto": "^4.1",
         "zircote/swagger-php": "^4.9"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23",
-        "laravel/pint": "^1.15",
+        "fakerphp/faker": "^1.24",
+        "laravel/pail": "^1.2",
+        "laravel/pint": "^1.21",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.1",
-        "pestphp/pest": "^2.34",
-        "pestphp/pest-plugin-laravel": "^2.3",
-        "pestphp/pest-plugin-type-coverage": "*",
-        "spatie/laravel-ignition": "^2.5"
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-laravel": "^3.1",
+        "pestphp/pest-plugin-type-coverage": "^3.3"
     },
     "autoload": {
         "psr-4": {
