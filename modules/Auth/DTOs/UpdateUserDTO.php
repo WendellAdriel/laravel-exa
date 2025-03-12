@@ -8,7 +8,10 @@ use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 use Modules\Auth\Support\Role;
 use OpenApi\Attributes as OA;
+use WendellAdriel\ValidatedDTO\Attributes\Cast;
 use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
+use WendellAdriel\ValidatedDTO\Concerns\EmptyCasts;
+use WendellAdriel\ValidatedDTO\Concerns\EmptyDefaults;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 #[OA\Schema(
@@ -25,6 +28,9 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 )]
 final class UpdateUserDTO extends ValidatedDTO
 {
+    use EmptyCasts,
+        EmptyDefaults;
+
     public ?string $name;
 
     public ?string $email;
@@ -35,6 +41,7 @@ final class UpdateUserDTO extends ValidatedDTO
 
     public ?string $role;
 
+    #[Cast(BooleanCast::class)]
     public bool $active;
 
     protected function rules(): array
@@ -55,18 +62,6 @@ final class UpdateUserDTO extends ValidatedDTO
             ],
             'role' => ['sometimes', 'string', new Enum(Role::class)],
             'active' => ['sometimes', 'boolean'],
-        ];
-    }
-
-    protected function defaults(): array
-    {
-        return [];
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'active' => new BooleanCast(),
         ];
     }
 }
