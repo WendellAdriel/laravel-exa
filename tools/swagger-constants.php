@@ -2,4 +2,4 @@
 
 declare(strict_types=1);
 
-define('API_HOST', 'localhost:8080');
+define('API_HOST', config('app.url'));
