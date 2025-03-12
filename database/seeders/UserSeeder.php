@@ -11,16 +11,13 @@ use Modules\Auth\Support\Role;
 
 final class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         $user = User::query()
             ->where('email', 'admin@example.com')
             ->first();
 
-        if (! $user) {
+        if (is_null($user)) {
             User::query()->create([
                 'email' => 'admin@example.com',
                 'name' => 'Admin',

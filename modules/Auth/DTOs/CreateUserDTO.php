@@ -8,7 +8,11 @@ use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 use Modules\Auth\Support\Role;
 use OpenApi\Attributes as OA;
+use WendellAdriel\ValidatedDTO\Attributes\Cast;
+use WendellAdriel\ValidatedDTO\Attributes\DefaultValue;
 use WendellAdriel\ValidatedDTO\Casting\EnumCast;
+use WendellAdriel\ValidatedDTO\Concerns\EmptyCasts;
+use WendellAdriel\ValidatedDTO\Concerns\EmptyDefaults;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 #[OA\Schema(
@@ -24,12 +28,17 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 )]
 final class CreateUserDTO extends ValidatedDTO
 {
+    use EmptyCasts,
+        EmptyDefaults;
+
     public string $name;
 
     public string $email;
 
     public string $password;
 
+    #[Cast(type: EnumCast::class, param: Role::class)]
+    #[DefaultValue(Role::REGULAR)]
     public Role $role;
 
     protected function rules(): array
@@ -48,20 +57,6 @@ final class CreateUserDTO extends ValidatedDTO
                 'confirmed',
             ],
             'role' => ['sometimes', 'string', new Enum(Role::class)],
-        ];
-    }
-
-    protected function defaults(): array
-    {
-        return [
-            'role' => Role::REGULAR,
-        ];
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'role' => new EnumCast(Role::class),
         ];
     }
 }

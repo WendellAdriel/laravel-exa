@@ -15,8 +15,7 @@ final readonly class ApiSuccessResponse implements Responsable
         private JsonResource $resource,
         private int $code = Response::HTTP_OK,
         private array $headers = []
-    ) {
-    }
+    ) {}
 
     public function toResponse($request): JsonResponse // @pest-ignore-type
     {

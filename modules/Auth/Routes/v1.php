@@ -12,22 +12,15 @@ Route::post('auth/login', [AuthController::class, 'login']);
 
 // Protected Routes
 Route::middleware('auth')->group(function () {
-    Route::prefix('auth')->group(function () {
-        Route::post('logout', [AuthController::class, 'logout']);
-        Route::get('me', [AuthController::class, 'user']);
-    });
+    Route::post('auth/logout', [AuthController::class, 'logout']);
+    Route::get('auth/me', [AuthController::class, 'user']);
 
-    Route::prefix('users')->group(function () {
-        Route::get('/', [UserController::class, 'index']);
-        Route::post('/', [UserController::class, 'store'])->middleware('has_role:' . Role::MANAGER->value);
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('users/{uuid}', [UserController::class, 'show']);
 
-        Route::prefix('{uuid}')->group(function () {
-            Route::get('/', [UserController::class, 'show']);
-
-            Route::middleware('has_role:' . Role::MANAGER->value)->group(function () {
-                Route::put('/', [UserController::class, 'update']);
-                Route::delete('/', [UserController::class, 'destroy']);
-            });
-        });
+    Route::middleware('has_role:' . Role::MANAGER->value)->group(function () {
+        Route::post('users', [UserController::class, 'store']);
+        Route::put('users/{uuid}', [UserController::class, 'update']);
+        Route::delete('users/{uuid}', [UserController::class, 'destroy']);
     });
 });

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Modules\Auth\Support\Role;
 
@@ -13,9 +14,9 @@ use Modules\Auth\Support\Role;
  */
 final class UserFactory extends Factory
 {
+    protected static ?string $password;
+
     /**
-     * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition(): array
@@ -24,22 +25,38 @@ final class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => self::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'role' => Role::ADMIN,
             'active' => true,
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return $this
-     */
-    public function unverified(): static
+    public function inactive(): static
     {
         return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            'active' => false,
+        ]);
+    }
+
+    public function viewer(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => Role::VIEWER,
+        ]);
+    }
+
+    public function regular(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => Role::REGULAR,
+        ]);
+    }
+
+    public function manager(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => Role::MANAGER,
         ]);
     }
 }

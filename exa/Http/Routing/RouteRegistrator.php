@@ -2,16 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Providers;
+namespace Exa\Http\Routing;
 
+use Carbon\Carbon;
 use Exa\Support\Formatter;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use OpenApi\Attributes as OA;
 
@@ -24,44 +20,17 @@ use OpenApi\Attributes as OA;
     scheme: 'bearer',
     bearerFormat: 'JWT'
 )]
-final class RouteServiceProvider extends ServiceProvider
+final class RouteRegistrator
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * Typically, users are redirected here after authentication.
-     *
-     * @var string
-     */
-    public const HOME = '/';
-
-    /**
-     * Define your route model bindings, pattern filters, and other route configuration.
-     */
-    public function boot(): void
+    public static function register(): void
     {
-        $this->configureRateLimiting();
-
-        $this->configureIndexRoute();
-
-        $this->configureV1Routes();
+        self::registerIndexRoute();
+        self::registerV1Routes();
     }
 
-    /**
-     * Configure the rate limiters for the application.
-     */
-    protected function configureRateLimiting(): void
+    private static function registerIndexRoute(): void
     {
-        RateLimiter::for(
-            'api',
-            fn (Request $request) => Limit::perMinute(60)
-                ->by($request->user()?->id ?: $request->ip())
-        );
-    }
-
-    private function configureIndexRoute(): void
-    {
-        Route::get(self::HOME, function () {
+        Route::get('/', function () {
             $data = [
                 'application' => config('app.name'),
                 'status' => Response::HTTP_OK,
@@ -83,7 +52,7 @@ final class RouteServiceProvider extends ServiceProvider
         })->name('login');
     }
 
-    private function configureV1Routes(): void
+    private static function registerV1Routes(): void
     {
         $modules = config('modules');
 

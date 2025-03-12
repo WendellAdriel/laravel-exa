@@ -29,13 +29,15 @@ trait UserActions
             $model->updated_by = Auth::id();
         });
 
-        static::softDeleted(function (Model $model) {
-            if ($model->disableUserActions) {
-                return;
-            }
+        if (in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses(static::class))) {
+            static::softDeleted(function (Model $model) {
+                if ($model->disableUserActions) {
+                    return;
+                }
 
-            $model->deleted_by = Auth::id();
-            $model->save();
-        });
+                $model->deleted_by = Auth::id();
+                $model->save();
+            });
+        }
     }
 }

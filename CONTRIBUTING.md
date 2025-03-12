@@ -23,17 +23,17 @@ For major changes, please open an issue first describing what you want to add/ch
 
 Clone your fork, then install the dev dependencies:
 ```bash
-make install
+composer install
 ```
 ## Lint
 
 Lint your code:
 ```bash
-make lint
+composer lint
 ```
 ## Tests
 
 Run all tests:
 ```bash
-make test
+composer test
 ```

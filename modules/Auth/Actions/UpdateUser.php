@@ -12,9 +12,7 @@ use Modules\Auth\Models\User;
 
 final readonly class UpdateUser
 {
-    public function __construct(private FetchUser $fetchUser)
-    {
-    }
+    public function __construct(private FetchUser $fetchUser) {}
 
     public function handle(string $uuid, UpdateUserDTO $dto): User
     {
