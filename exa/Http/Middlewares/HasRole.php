@@ -13,9 +13,7 @@ use Modules\Auth\Support\Role;
 
 final readonly class HasRole
 {
-    public function __construct(private HasRoleAction $action)
-    {
-    }
+    public function __construct(private HasRoleAction $action) {}
 
     /**
      * @throws AccessDeniedException

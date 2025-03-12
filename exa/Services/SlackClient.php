@@ -15,8 +15,7 @@ final readonly class SlackClient
         private string $botIcon,
         private string $webhook,
         private string $defaultChannel
-    ) {
-    }
+    ) {}
 
     public function sendNotification(string $message, array $users = [], ?string $target = null): void
     {

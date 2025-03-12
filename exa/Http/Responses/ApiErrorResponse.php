@@ -16,8 +16,7 @@ final readonly class ApiErrorResponse implements Responsable
         private ?Throwable $exception = null,
         private int $code = Response::HTTP_INTERNAL_SERVER_ERROR,
         private array $headers = []
-    ) {
-    }
+    ) {}
 
     public function toResponse($request): JsonResponse // @pest-ignore-type
     {
