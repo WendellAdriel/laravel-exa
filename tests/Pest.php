@@ -13,8 +13,11 @@ declare(strict_types=1);
 |
 */
 
+use Modules\Auth\Models\User;
+use Modules\Auth\Support\Role;
+
 pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
 
 /*
@@ -41,7 +44,28 @@ expect()->extend('toBeOne', fn () => $this->toBe(1));
 |
 */
 
-function something()
+function testUser(Role $role): User
 {
-    // ..
+    $user = new User([
+        'name' => fake()->name(),
+        'email' => fake()->unique()->safeEmail(),
+        'email_verified_at' => now(),
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'role' => $role,
+        'active' => true,
+    ]);
+
+    $user->save();
+
+    return $user;
+}
+
+function dumbUserData(): array
+{
+    return [
+        'name' => 'John Doe',
+        'email' => 'john.doe@example.com',
+        'password' => 's3CR3t@!',
+        'password_confirmation' => 's3CR3t@!',
+    ];
 }
