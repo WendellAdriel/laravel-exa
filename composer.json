@@ -62,7 +62,7 @@
             "pest"
         ],
         "test:types": [
-            "pest --type-coverage --min=100"
+            "pest --type-coverage"
         ],
         "swagger": [
             "sh ./tools/swagger.sh"

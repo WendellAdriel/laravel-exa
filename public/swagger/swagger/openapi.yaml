@@ -389,3 +389,10 @@ components:
       in: header
       bearerFormat: JWT
       scheme: bearer
+tags:
+  -
+    name: Auth
+    description: Auth
+  -
+    name: 'Users Management'
+    description: 'Users Management'
