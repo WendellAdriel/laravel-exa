@@ -23,12 +23,12 @@
     "require": {
         "php": "^8.4",
         "ext-curl": "*",
-        "guzzlehttp/guzzle": "^7.8",
-        "laravel/framework": "^12.1",
+        "guzzlehttp/guzzle": "^7.9",
+        "laravel/framework": "^12.2",
         "laravel/tinker": "^2.10",
-        "tymon/jwt-auth": "^2.1",
+        "tymon/jwt-auth": "^2.2",
         "wendelladriel/laravel-validated-dto": "^4.1",
-        "zircote/swagger-php": "^4.9"
+        "zircote/swagger-php": "^4.11"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
@@ -37,8 +37,7 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "pestphp/pest": "^3.7",
-        "pestphp/pest-plugin-laravel": "^3.1",
-        "pestphp/pest-plugin-type-coverage": "^3.3"
+        "pestphp/pest-plugin-laravel": "^3.1"
     },
     "autoload": {
         "psr-4": {
@@ -61,15 +60,11 @@
         "test": [
             "pest"
         ],
-        "test:types": [
-            "pest --type-coverage"
-        ],
         "swagger": [
             "sh ./tools/swagger.sh"
         ],
         "prepare": [
             "pint --dirty",
-            "@test:types",
             "@swagger"
         ],
         "post-autoload-dump": [
