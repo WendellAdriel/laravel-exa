@@ -24,6 +24,7 @@ final class AppServiceProvider extends ServiceProvider
         Blueprint::macro('userActions', function () {
             $this->foreignId('created_by')->nullable()->constrained(table: User::getModelTable());
             $this->foreignId('updated_by')->nullable()->constrained(table: User::getModelTable());
+            $this->foreignId('deleted_by')->nullable()->constrained(table: User::getModelTable());
         });
     }
 
