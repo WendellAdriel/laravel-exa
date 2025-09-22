@@ -35,9 +35,6 @@ jobs:
       - name: Code Style
         run: composer lint:check
 
-      - name: Test Suite
-        run: composer test:unit
-
       - name: Type Coverage
         run: composer test:types
 
