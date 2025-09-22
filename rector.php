@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
@@ -20,7 +19,6 @@ return RectorConfig::configure()
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
-        codingStyle: true,
         typeDeclarations: true,
         privatization: true,
         instanceOf: true,
@@ -28,6 +26,4 @@ return RectorConfig::configure()
         strictBooleans: true,
         carbon: true,
         rectorPreset: true
-    )->withSkip([
-        EncapsedStringsToSprintfRector::class,
-    ]);
+    );

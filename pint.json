@@ -3,14 +3,17 @@
     "rules": {
         "array_push": true,
         "assign_null_coalescing_to_coalesce_equal": true,
+        "backtick_to_shell_exec": true,
         "combine_consecutive_issets": true,
         "combine_consecutive_unsets": true,
         "concat_space": {
             "spacing": "one"
         },
+        "date_time_immutable": true,
         "declare_strict_types": true,
         "explicit_indirect_variable": true,
         "explicit_string_variable": true,
+        "fully_qualified_strict_types": true,
         "global_namespace_import": true,
         "method_argument_space": {
             "on_multiline": "ensure_fully_multiline"
@@ -18,12 +21,10 @@
         "modernize_strpos": true,
         "modernize_types_casting": true,
         "new_with_braces": true,
+        "no_multiple_statements_per_line": true,
         "no_superfluous_elseif": true,
         "no_useless_else": true,
         "nullable_type_declaration_for_default_null_value": true,
-        "ordered_imports": {
-            "sort_algorithm": "alpha"
-        },
         "ordered_class_elements": {
             "order": [
                 "use_trait",
@@ -49,8 +50,14 @@
             ],
             "sort_algorithm": "none"
         },
+        "ordered_imports": {
+            "sort_algorithm": "alpha"
+        },
+        "ordered_interfaces": true,
+        "ordered_traits": true,
         "strict_comparison": true,
         "ternary_to_null_coalescing": true,
-        "use_arrow_functions": true
+        "use_arrow_functions": true,
+        "visibility_required": true
     }
 }

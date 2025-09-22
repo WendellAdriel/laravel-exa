@@ -296,7 +296,7 @@ return [
         |
         */
 
-        'storage' => \Exa\Support\JWTStorage::class,
+        'storage' => Exa\Support\JWTStorage::class,
 
     ],
 

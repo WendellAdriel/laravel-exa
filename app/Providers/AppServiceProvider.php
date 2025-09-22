@@ -56,7 +56,7 @@ final class AppServiceProvider extends ServiceProvider
     {
         $webhook = config('services.slack.webhook');
         if (! is_null($webhook)) {
-            $this->app->bind(SlackClient::class, fn (): \Exa\Services\SlackClient => new SlackClient(
+            $this->app->bind(SlackClient::class, fn (): SlackClient => new SlackClient(
                 config('services.slack.bot.name'),
                 config('services.slack.bot.icon'),
                 $webhook,
