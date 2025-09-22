@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use Carbon\CarbonImmutable;
 use Exa\Services\SlackClient;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 use Modules\Auth\Models\User;
 
 final class AppServiceProvider extends ServiceProvider
@@ -20,6 +25,23 @@ final class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         JsonResource::withoutWrapping();
+        Date::use(CarbonImmutable::class);
+
+        Model::shouldBeStrict();
+        Model::automaticallyEagerLoadRelationships();
+        DB::prohibitDestructiveCommands(app()->isProduction());
+
+        Password::defaults(
+            fn (): ?Password => app()->isProduction()
+            ? Password::min(12)
+                ->max(255)
+                ->mixedCase()
+                ->letters()
+                ->numbers()
+                ->symbols()
+                ->uncompromised()
+            : null
+        );
 
         Blueprint::macro('userActions', function () {
             $this->foreignId('created_by')->nullable()->constrained(table: User::getModelTable());
