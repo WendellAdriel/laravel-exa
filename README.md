@@ -26,7 +26,7 @@
 * Your API running on the latest version of Laravel and PHP
 * API Documentation with Swagger
 * Laravel Pint configuration (very opinionated)
-* Pest v3 for Tests
+* Pest v4 for Tests with 100% type coverage
 * Base classes to speed up the development
 * DTOs with [Laravel Validated DTO](https://github.com/WendellAdriel/laravel-validated-dto)
 * Slack Client for notifications
@@ -35,6 +35,11 @@
 * Users management out-of-the-box with simple roles system
 * Logs on DB for user logins and for actions made on models
 * Log actions made by users with the `created_by`, `updated_by` and `deleted_by` fields. Use the `$table->userActions()` in your migrations to add these fields.
+* Strict mode for Models + automatic eager load relationships
+* Dates use `CarbonImmutable` by default
+* Prohibit destructive commands in PROD
+* Strong password validation by default
+* Rector configuration for better code
 
 ## Using the Template
 
@@ -103,11 +108,29 @@ Run the linter (Pint) in the whole codebase
 composer lint
 ```
 
+Run the linter (Pint) in dry-run mode
+
+```bash
+composer lint:check
+```
+
 Run the test suite
 
 ```bash
-composer test
+composer test:unit
 ```
+
+Run the type coverage tests
+
+```bash
+composer test:types
+```
+
+Run Rector
+
+```bash
+composer rector
+````
 
 Update the Swagger docs
 
@@ -119,6 +142,12 @@ Run the linter (Pint) in staged files and update the Swagger docs
 
 ```bash
 composer prepare
+```
+
+Runs the commands `lint:check`, `test:unit`, `test:types` and `rector`
+
+```bash
+composer test
 ```
 
 ## ExA Classes

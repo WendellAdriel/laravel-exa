@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Auth\Models\User;
 use Modules\Auth\Support\Role;
 
-it('checks that admin user can update user email, role and active status', function () {
+it('checks that admin user can update user email, role and active status', function (): void {
     $newUser = testUser(Role::REGULAR);
     $params = [
         'email' => 'test@test.com',
@@ -26,7 +26,7 @@ it('checks that admin user can update user email, role and active status', funct
     ]);
 });
 
-it('checks that non-admin user can not update user email, role and active status', function () {
+it('checks that non-admin user can not update user email, role and active status', function (): void {
     $newUser = testUser(Role::REGULAR);
     $params = [
         'email' => 'test@test.com',
@@ -44,7 +44,7 @@ it('checks that non-admin user can not update user email, role and active status
     ]);
 });
 
-it('checks that user can update its own email', function () {
+it('checks that user can update its own email', function (): void {
     $user = testUser(Role::MANAGER);
     $params = [
         'email' => 'test@test.com',
@@ -59,7 +59,7 @@ it('checks that user can update its own email', function () {
     ]);
 });
 
-it('checks that user can update its own password', function () {
+it('checks that user can update its own password', function (): void {
     $user = testUser(Role::MANAGER);
     $params = [
         'current_password' => 'password',
@@ -76,7 +76,7 @@ it('checks that user can update its own password', function () {
     ]);
 });
 
-it('checks that user can not update its own password if current password is not correct', function () {
+it('checks that user can not update its own password if current password is not correct', function (): void {
     $user = testUser(Role::MANAGER);
     $params = [
         'current_password' => 'test',
@@ -93,7 +93,7 @@ it('checks that user can not update its own password if current password is not 
     ]);
 });
 
-it('checks that user can not update password of other users', function () {
+it('checks that user can not update password of other users', function (): void {
     $user = testUser(Role::REGULAR);
     $params = [
         'current_password' => 'password',

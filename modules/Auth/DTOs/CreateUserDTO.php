@@ -28,8 +28,8 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 )]
 final class CreateUserDTO extends ValidatedDTO
 {
-    use EmptyCasts,
-        EmptyDefaults;
+    use EmptyCasts;
+    use EmptyDefaults;
 
     public string $name;
 

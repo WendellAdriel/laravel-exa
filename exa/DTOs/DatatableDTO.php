@@ -46,17 +46,17 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 )]
 class DatatableDTO extends ValidatedDTO
 {
-    public const PER_PAGE_ALL = 'all';
+    public const string PER_PAGE_ALL = 'all';
 
     public int $page;
 
     public int|string $per_page;
 
-    public ?string $sort_field;
+    public ?string $sort_field = null;
 
-    public ?SortOption $sort_order;
+    public ?SortOption $sort_order = null;
 
-    public ?string $search;
+    public ?string $search = null;
 
     public function getAll(): bool
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Modules\Auth\Support\Role;
 
-it('logins successfully', function () {
+it('logins successfully', function (): void {
     $user = testUser(Role::ADMIN);
     $params = [
         'email' => $user->email,
@@ -15,7 +15,7 @@ it('logins successfully', function () {
         ->toHaveKeys(['type', 'token']);
 });
 
-it('fails to login with wrong credentials', function () {
+it('fails to login with wrong credentials', function (): void {
     $user = testUser(Role::ADMIN);
     $params = [
         'email' => $user->email,

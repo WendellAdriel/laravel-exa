@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 
-it('test that application is up', function () {
+it('test that application is up', function (): void {
     expect($this->get('/')->json())
         ->toBe([
             'application' => config('app.name'),

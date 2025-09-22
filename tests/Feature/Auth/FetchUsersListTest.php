@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Modules\Auth\Support\Role;
 
-it('gets the list of users', function () {
+it('gets the list of users', function (): void {
     foreach (range(1, 9) as $number) {
         testUser(Role::REGULAR);
     }

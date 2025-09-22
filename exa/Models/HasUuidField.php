@@ -17,14 +17,14 @@ trait HasUuidField
 
     protected static function bootHasUuidField()
     {
-        static::creating(function ($model) {
+        static::creating(function ($model): void {
             $uuidFieldName = $model->getUuidFieldName();
             if ($uuidFieldName && ! isset($model->{$uuidFieldName})) {
                 $model->{$uuidFieldName} = Str::uuid()->toString();
             }
         });
 
-        static::saving(function ($model) {
+        static::saving(function ($model): void {
             $uuidFieldName = $model->getUuidFieldName();
             if (! empty($uuidFieldName)) {
                 $originalUuid = $model->getOriginal($uuidFieldName);

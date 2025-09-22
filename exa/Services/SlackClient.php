@@ -26,11 +26,11 @@ final readonly class SlackClient
                 return;
             }
 
-            $environment = strtoupper(config('app.env'));
+            $environment = strtoupper((string) config('app.env'));
             $formattedUsers = $this->formatUsersToMention($users);
-            $message = empty($formattedUsers) ? $message : "{$formattedUsers}: {$message}";
+            $message = $formattedUsers === '' || $formattedUsers === '0' ? $message : "{$formattedUsers}: {$message}";
             $finalMessage = "[{$environment}] - {$message}";
-            $channelToNotify = empty($target) ? $this->defaultChannel : $target;
+            $channelToNotify = $target === null || $target === '' || $target === '0' ? $this->defaultChannel : $target;
 
             $payloadData = [
                 'username' => $this->botName,
@@ -50,9 +50,10 @@ final readonly class SlackClient
             ];
 
             curl_setopt_array($ch, $options);
-            if (! curl_exec($ch)) {
+            if (curl_exec($ch) === false || in_array(curl_exec($ch), ['', '0'], true)) {
                 throw new Exception(curl_error($ch));
             }
+
             curl_close($ch);
         } catch (Exception $exception) {
             $msgTpl = 'Failed to notify Slack Channel for webhook %s: "%s"';
@@ -62,11 +63,11 @@ final readonly class SlackClient
 
     private function formatUsersToMention(array $users): string
     {
-        if (empty($users)) {
+        if ($users === []) {
             return '';
         }
 
-        $formatted = array_map(fn (string $user) => "<@{$user}>", $users);
+        $formatted = array_map(fn (string $user): string => "<@{$user}>", $users);
 
         return implode(', ', $formatted);
     }

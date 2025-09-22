@@ -18,9 +18,9 @@ trait LogChanges
 
     public bool $logDeleteEvent = true;
 
-    public static function bootLogChanges()
+    public static function bootLogChanges(): void
     {
-        static::saved(function (Model $model) {
+        static::saved(function (Model $model): void {
             if ($model->disableChangeLogs) {
                 return;
             }
@@ -31,13 +31,14 @@ trait LogChanges
                 if (! $model->getChanges()) {
                     return;
                 }
+
                 if ($model->logUpdateEvent) {
                     static::logChange($model, ChangeAction::UPDATE);
                 }
             }
         });
 
-        static::deleted(function (Model $model) {
+        static::deleted(function (Model $model): void {
             if ($model->disableChangeLogs) {
                 return;
             }

@@ -11,9 +11,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 final readonly class Datatable
 {
-    public const ALL_COLUMNS = ['*'];
+    public const array ALL_COLUMNS = ['*'];
 
-    public const DEFAULT_PAGE_NAME = 'page';
+    public const string DEFAULT_PAGE_NAME = 'page';
 
     public static function applyPagination(
         Builder $builder,
@@ -28,7 +28,7 @@ final readonly class Datatable
 
     public static function applySort(Builder $builder, DatatableDTO $dto): Builder
     {
-        if (empty($dto->sort_field)) {
+        if ($dto->sort_field === null || $dto->sort_field === '' || $dto->sort_field === '0') {
             return $builder;
         }
 
@@ -39,11 +39,11 @@ final readonly class Datatable
 
     public static function applyFilter(Builder $builder, DatatableDTO $dto, array $fieldsToSearch): Builder
     {
-        if (empty($dto->search) || empty($fieldsToSearch)) {
+        if ($dto->search === null || $dto->search === '' || $dto->search === '0' || $fieldsToSearch === []) {
             return $builder;
         }
 
-        return $builder->where(function (Builder $query) use ($dto, $fieldsToSearch) {
+        return $builder->where(function (Builder $query) use ($dto, $fieldsToSearch): void {
             foreach ($fieldsToSearch as $field) {
                 $query->orwhere($field, 'LIKE', "%{$dto->search}%");
             }

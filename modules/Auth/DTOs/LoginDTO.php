@@ -21,9 +21,9 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 )]
 final class LoginDTO extends ValidatedDTO
 {
-    use EmptyCasts,
-        EmptyDefaults,
-        EmptyRules;
+    use EmptyCasts;
+    use EmptyDefaults;
+    use EmptyRules;
 
     #[Rules(['required', 'email'])]
     public string $email;

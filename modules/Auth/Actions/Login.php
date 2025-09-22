@@ -12,7 +12,7 @@ use Modules\Auth\Models\UserLogin;
 
 final readonly class Login
 {
-    private const TOKEN_TYPE = 'Bearer';
+    private const string TOKEN_TYPE = 'Bearer';
 
     public function handle(LoginDTO $dto): array
     {
