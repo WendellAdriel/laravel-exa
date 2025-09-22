@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Modules\Auth\Models\User;
+use Override;
 
 final class AppServiceProvider extends ServiceProvider
 {
-    #[\Override]
+    #[Override]
     public function register(): void
     {
         $this->registerSlackClient();
@@ -55,7 +56,7 @@ final class AppServiceProvider extends ServiceProvider
     {
         $webhook = config('services.slack.webhook');
         if (! is_null($webhook)) {
-            $this->app->bind(SlackClient::class, fn () => new SlackClient(
+            $this->app->bind(SlackClient::class, fn (): \Exa\Services\SlackClient => new SlackClient(
                 config('services.slack.bot.name'),
                 config('services.slack.bot.icon'),
                 $webhook,

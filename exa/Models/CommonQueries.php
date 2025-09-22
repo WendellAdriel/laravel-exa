@@ -106,7 +106,7 @@ trait CommonQueries
             $columns = $columns[0];
         }
 
-        if (empty($columns)) {
+        if ($columns === []) {
             $columns = [self::ALL_COLUMNS];
         }
 

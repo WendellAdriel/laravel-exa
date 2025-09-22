@@ -11,7 +11,7 @@ trait UserActions
 {
     public bool $disableUserActions = false;
 
-    public static function bootUserActions()
+    public static function bootUserActions(): void
     {
         static::creating(function (Model $model): void {
             if ($model->disableUserActions) {

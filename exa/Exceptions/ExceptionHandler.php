@@ -8,10 +8,11 @@ use Exa\Http\Responses\ApiErrorResponse;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Throwable;
 
 final class ExceptionHandler
 {
-    public static function handleException(\Throwable $exception): ApiErrorResponse
+    public static function handleException(Throwable $exception): ApiErrorResponse
     {
         if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
             return self::error($exception, Response::HTTP_UNAUTHORIZED, 'Unauthenticated');

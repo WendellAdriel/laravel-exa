@@ -28,7 +28,7 @@ final readonly class Datatable
 
     public static function applySort(Builder $builder, DatatableDTO $dto): Builder
     {
-        if (empty($dto->sort_field)) {
+        if ($dto->sort_field === null || $dto->sort_field === '' || $dto->sort_field === '0') {
             return $builder;
         }
 
@@ -39,7 +39,7 @@ final readonly class Datatable
 
     public static function applyFilter(Builder $builder, DatatableDTO $dto, array $fieldsToSearch): Builder
     {
-        if (empty($dto->search) || empty($fieldsToSearch)) {
+        if ($dto->search === null || $dto->search === '' || $dto->search === '0' || $fieldsToSearch === []) {
             return $builder;
         }
 

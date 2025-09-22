@@ -7,6 +7,7 @@ namespace Modules\Auth\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes as OA;
+use Override;
 
 #[OA\Schema(
     schema: 'user',
@@ -22,7 +23,7 @@ use OpenApi\Attributes as OA;
 )]
 final class UserResource extends JsonResource
 {
-    #[\Override]
+    #[Override]
     public function toArray(Request $request): array
     {
         return [

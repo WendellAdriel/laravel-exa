@@ -15,18 +15,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Modules\Auth\Support\Role;
 use Modules\Auth\Traits\HasRole;
+use Override;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 final class User extends Authenticatable implements JWTSubject
 {
-    use CommonQueries,
-        HasFactory,
-        HasRole,
-        HasUuidField,
-        LogChanges,
-        Notifiable,
-        SoftDeletes,
-        UserActions;
+    use CommonQueries;
+    use HasFactory;
+    use HasRole;
+    use HasUuidField;
+    use LogChanges;
+    use Notifiable;
+    use SoftDeletes;
+    use UserActions;
 
     protected $fillable = [
         'uuid',
@@ -64,7 +65,7 @@ final class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    #[\Override]
+    #[Override]
     protected static function booted(): void
     {
         self::addGlobalScope(

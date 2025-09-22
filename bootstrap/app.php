@@ -24,7 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(fn (Exception $exception) => ExceptionHandler::handleException($exception));
+        $exceptions->render(fn (Exception $exception): \Exa\Http\Responses\ApiErrorResponse => ExceptionHandler::handleException($exception));
     })
     ->withCommands([
         MakeModuleCommand::class,

@@ -24,6 +24,7 @@ final readonly class HasRole
         if (is_null($user)) {
             throw new AccessDeniedException();
         }
+
         if (! $this->action->handle($user, Role::from($role))) {
             throw new AccessDeniedException();
         }
