@@ -57,25 +57,23 @@
     },
     "scripts": {
         "lint": [
-            "pint --parallel"
+            "pint --parallel",
+            "rector"
         ],
-        "lint:check": [
-            "pint --parallel --test"
-        ],
-        "test:unit": [
-            "pest"
+        "test:lint": [
+            "pint --parallel --test",
+            "rector --dry-run"
         ],
         "test:types": [
             "pest --type-coverage --min=100"
         ],
-        "rector": [
-            "rector"
+        "test:unit": [
+            "pest"
         ],
         "test": [
-            "@lint:check",
-            "@test:unit",
+            "@test:lint",
             "@test:types",
-            "@rector"
+            "@test:unit"
         ],
         "swagger": [
             "sh ./tools/swagger.sh"

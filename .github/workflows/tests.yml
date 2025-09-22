@@ -32,11 +32,8 @@ jobs:
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:>=2.62.1" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
-      - name: Code Style
-        run: composer lint:check
+      - name: Pint & Rector
+        run: composer test:lint
 
       - name: Type Coverage
         run: composer test:types
-
-      - name: Rector
-        run: composer rector

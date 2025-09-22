@@ -102,22 +102,16 @@ the module disabled by default. To enable it, add the new module name to the `co
 
 ### Commands Available
 
-Run the linter (Pint) in the whole codebase
+Run the linter (Pint) and Rector in the whole codebase
 
 ```bash
 composer lint
 ```
 
-Run the linter (Pint) in dry-run mode
+Run the linter (Pint) and Rector in dry-run mode
 
 ```bash
-composer lint:check
-```
-
-Run the test suite
-
-```bash
-composer test:unit
+composer test:lint
 ```
 
 Run the type coverage tests
@@ -126,11 +120,11 @@ Run the type coverage tests
 composer test:types
 ```
 
-Run Rector
+Run the test suite
 
 ```bash
-composer rector
-````
+composer test:unit
+```
 
 Update the Swagger docs
 
@@ -144,7 +138,7 @@ Run the linter (Pint) in staged files and update the Swagger docs
 composer prepare
 ```
 
-Runs the commands `lint:check`, `test:unit`, `test:types` and `rector`
+Runs the commands `test:lint`, `test:types` and `test:unit`
 
 ```bash
 composer test
