@@ -66,7 +66,7 @@
             "pest"
         ],
         "test:types": [
-            "pest --type-coverage"
+            "pest --type-coverage --min=100"
         ],
         "rector": [
             "rector"
