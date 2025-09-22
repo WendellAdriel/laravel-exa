@@ -11,9 +11,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 final readonly class Datatable
 {
-    public const ALL_COLUMNS = ['*'];
+    public const array ALL_COLUMNS = ['*'];
 
-    public const DEFAULT_PAGE_NAME = 'page';
+    public const string DEFAULT_PAGE_NAME = 'page';
 
     public static function applyPagination(
         Builder $builder,

@@ -26,7 +26,7 @@
 * Your API running on the latest version of Laravel and PHP
 * API Documentation with Swagger
 * Laravel Pint configuration (very opinionated)
-* Pest v4 for Tests
+* Pest v4 for Tests with 100% type coverage
 * Base classes to speed up the development
 * DTOs with [Laravel Validated DTO](https://github.com/WendellAdriel/laravel-validated-dto)
 * Slack Client for notifications
