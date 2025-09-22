@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Modules\Auth\Support\Role;
 
-it('gets user info', function () {
+it('gets user info', function (): void {
     $newUser = testUser(Role::REGULAR);
 
     expect($this->actingAs(testUser(Role::ADMIN))->get("v1/users/{$newUser->uuid}")->json())
@@ -19,7 +19,7 @@ it('gets user info', function () {
         ]);
 });
 
-it('return 404 for user that does not exist', function () {
+it('return 404 for user that does not exist', function (): void {
     expect($this->actingAs(testUser(Role::ADMIN))->get('v1/users/test'))
         ->assertNotFound();
 });

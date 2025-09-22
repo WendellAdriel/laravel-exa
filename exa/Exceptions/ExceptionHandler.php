@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 
 final class ExceptionHandler
 {
-    public static function handleException(Exception $exception): ApiErrorResponse
+    public static function handleException(\Throwable $exception): ApiErrorResponse
     {
         if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
             return self::error($exception, Response::HTTP_UNAUTHORIZED, 'Unauthenticated');

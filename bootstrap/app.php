@@ -16,14 +16,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/health',
         then: fn () => RouteRegistrator::register(),
     )
-    ->withMiddleware(function (Middleware $middleware) {
+    ->withMiddleware(function (Middleware $middleware): void {
         $middleware->api(append: [
             BlockViewerUsers::class,
         ])->alias([
             'has_role' => HasRole::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(fn (Exception $exception) => ExceptionHandler::handleException($exception));
     })
     ->withCommands([

@@ -17,6 +17,7 @@ use Modules\Auth\Models\User;
 
 final class AppServiceProvider extends ServiceProvider
 {
+    #[\Override]
     public function register(): void
     {
         $this->registerSlackClient();
@@ -43,7 +44,7 @@ final class AppServiceProvider extends ServiceProvider
             : null
         );
 
-        Blueprint::macro('userActions', function () {
+        Blueprint::macro('userActions', function (): void {
             $this->foreignId('created_by')->nullable()->constrained(table: User::getModelTable());
             $this->foreignId('updated_by')->nullable()->constrained(table: User::getModelTable());
             $this->foreignId('deleted_by')->nullable()->constrained(table: User::getModelTable());

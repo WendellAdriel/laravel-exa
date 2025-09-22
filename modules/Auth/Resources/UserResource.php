@@ -22,6 +22,7 @@ use OpenApi\Attributes as OA;
 )]
 final class UserResource extends JsonResource
 {
+    #[\Override]
     public function toArray(Request $request): array
     {
         return [

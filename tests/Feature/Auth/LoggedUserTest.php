@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Modules\Auth\Support\Role;
 
-it('gets the logged user', function () {
+it('gets the logged user', function (): void {
     $user = testUser(Role::ADMIN);
     $this->actingAs($user);
 

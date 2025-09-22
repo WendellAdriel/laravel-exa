@@ -17,6 +17,7 @@ use OpenApi\Attributes as OA;
 )]
 final class LoginResource extends JsonResource
 {
+    #[\Override]
     public function toArray(Request $request): array
     {
         return [

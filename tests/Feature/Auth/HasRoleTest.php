@@ -5,25 +5,25 @@ declare(strict_types=1);
 use Modules\Auth\Actions\HasRole;
 use Modules\Auth\Support\Role;
 
-beforeEach(function () {
+beforeEach(function (): void {
     $this->action = resolve(HasRole::class);
 });
 
-it('returns true for correct role', function () {
+it('returns true for correct role', function (): void {
     $user = testUser(Role::VIEWER);
 
     expect($this->action->handle($user, Role::VIEWER))
         ->toBeTrue();
 });
 
-it('returns false for wrong role', function () {
+it('returns false for wrong role', function (): void {
     $user = testUser(Role::VIEWER);
 
     expect($this->action->handle($user, Role::REGULAR))
         ->toBeFalse();
 });
 
-it('checks that admin role overrides other roles', function () {
+it('checks that admin role overrides other roles', function (): void {
     $user = testUser(Role::ADMIN);
 
     expect($this->action->handle($user, Role::MANAGER))

@@ -11,14 +11,14 @@ use Modules\Auth\Support\Role;
 Route::post('auth/login', [AuthController::class, 'login']);
 
 // Protected Routes
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function (): void {
     Route::post('auth/logout', [AuthController::class, 'logout']);
     Route::get('auth/me', [AuthController::class, 'user']);
 
     Route::get('users', [UserController::class, 'index']);
     Route::get('users/{uuid}', [UserController::class, 'show']);
 
-    Route::middleware('has_role:' . Role::MANAGER->value)->group(function () {
+    Route::middleware('has_role:' . Role::MANAGER->value)->group(function (): void {
         Route::post('users', [UserController::class, 'store']);
         Route::put('users/{uuid}', [UserController::class, 'update']);
         Route::delete('users/{uuid}', [UserController::class, 'destroy']);

@@ -13,7 +13,7 @@ trait UserActions
 
     public static function bootUserActions()
     {
-        static::creating(function (Model $model) {
+        static::creating(function (Model $model): void {
             if ($model->disableUserActions) {
                 return;
             }
@@ -21,7 +21,7 @@ trait UserActions
             $model->created_by = Auth::id();
         });
 
-        static::updating(function (Model $model) {
+        static::updating(function (Model $model): void {
             if ($model->disableUserActions) {
                 return;
             }
@@ -29,8 +29,8 @@ trait UserActions
             $model->updated_by = Auth::id();
         });
 
-        if (in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses(static::class))) {
-            static::softDeleted(function (Model $model) {
+        if (in_array(\Illuminate\Database\Eloquent\SoftDeletes::class, class_uses(static::class))) {
+            static::softDeleted(function (Model $model): void {
                 if ($model->disableUserActions) {
                     return;
                 }

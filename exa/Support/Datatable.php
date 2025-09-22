@@ -43,7 +43,7 @@ final readonly class Datatable
             return $builder;
         }
 
-        return $builder->where(function (Builder $query) use ($dto, $fieldsToSearch) {
+        return $builder->where(function (Builder $query) use ($dto, $fieldsToSearch): void {
             foreach ($fieldsToSearch as $field) {
                 $query->orwhere($field, 'LIKE', "%{$dto->search}%");
             }

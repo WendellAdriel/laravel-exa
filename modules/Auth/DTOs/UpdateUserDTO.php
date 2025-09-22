@@ -31,15 +31,15 @@ final class UpdateUserDTO extends ValidatedDTO
     use EmptyCasts,
         EmptyDefaults;
 
-    public ?string $name;
+    public ?string $name = null;
 
-    public ?string $email;
+    public ?string $email = null;
 
-    public ?string $current_password;
+    public ?string $current_password = null;
 
-    public ?string $password;
+    public ?string $password = null;
 
-    public ?string $role;
+    public ?string $role = null;
 
     #[Cast(BooleanCast::class)]
     public bool $active;

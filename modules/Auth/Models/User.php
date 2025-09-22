@@ -64,6 +64,7 @@ final class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    #[\Override]
     protected static function booted(): void
     {
         self::addGlobalScope(

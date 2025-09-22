@@ -26,7 +26,7 @@ final readonly class SlackClient
                 return;
             }
 
-            $environment = strtoupper(config('app.env'));
+            $environment = strtoupper((string) config('app.env'));
             $formattedUsers = $this->formatUsersToMention($users);
             $message = empty($formattedUsers) ? $message : "{$formattedUsers}: {$message}";
             $finalMessage = "[{$environment}] - {$message}";

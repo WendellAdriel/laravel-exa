@@ -79,7 +79,7 @@ trait CommonQueries
 
     public static function getModelTable(): string
     {
-        return (new static())->getTable();
+        return new static()->getTable();
     }
 
     private static function getByParamsBase(array $params, string $defaultCompareType = '=', bool $withTrashed = false): Builder
@@ -87,7 +87,7 @@ trait CommonQueries
         $query = self::newQueryBuilder();
         foreach ($params as $param) {
             $compareType = count($param) === 2 ? $defaultCompareType : $param[2];
-            $query = (mb_strtoupper($compareType) === self::COMPARE_IN)
+            $query = (mb_strtoupper((string) $compareType) === self::COMPARE_IN)
                 ? $query->whereIn($param[0], $param[1])
                 : $query->where($param[0], $compareType, $param[1]);
         }

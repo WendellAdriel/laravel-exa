@@ -20,7 +20,7 @@ trait LogChanges
 
     public static function bootLogChanges()
     {
-        static::saved(function (Model $model) {
+        static::saved(function (Model $model): void {
             if ($model->disableChangeLogs) {
                 return;
             }
@@ -37,7 +37,7 @@ trait LogChanges
             }
         });
 
-        static::deleted(function (Model $model) {
+        static::deleted(function (Model $model): void {
             if ($model->disableChangeLogs) {
                 return;
             }

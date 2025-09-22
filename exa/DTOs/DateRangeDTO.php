@@ -10,7 +10,7 @@ use WendellAdriel\ValidatedDTO\Casting\CarbonImmutableCast;
 
 class DateRangeDTO extends DatatableDTO
 {
-    public ?CarbonImmutable $start_date;
+    public ?CarbonImmutable $start_date = null;
 
     public CarbonImmutable $end_date;
 
@@ -26,6 +26,7 @@ class DateRangeDTO extends DatatableDTO
         return $this;
     }
 
+    #[\Override]
     protected function rules(): array
     {
         return array_merge(parent::rules(), [
@@ -34,6 +35,7 @@ class DateRangeDTO extends DatatableDTO
         ]);
     }
 
+    #[\Override]
     protected function defaults(): array
     {
         return array_merge(parent::defaults(), [
@@ -41,6 +43,7 @@ class DateRangeDTO extends DatatableDTO
         ]);
     }
 
+    #[\Override]
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
