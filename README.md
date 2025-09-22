@@ -39,6 +39,7 @@
 * Dates use `CarbonImmutable` by default
 * Prohibit destructive commands in PROD
 * Strong password validation by default
+* Rector configuration for better code
 
 ## Using the Template
 
@@ -119,6 +120,18 @@ Run the test suite
 composer test:unit
 ```
 
+Run the type coverage tests
+
+```bash
+composer test:types
+```
+
+Run Rector
+
+```bash
+composer rector
+````
+
 Update the Swagger docs
 
 ```bash
@@ -131,10 +144,10 @@ Run the linter (Pint) in staged files and update the Swagger docs
 composer prepare
 ```
 
-Runs the commands `lint:check` and `test:unit`
+Runs the commands `lint:check`, `test:unit`, `test:types` and `rector`
 
 ```bash
-composer lint
+composer test
 ```
 
 ## ExA Classes
